@@ -46,21 +46,20 @@ __all__ = [
 
 
 class Maisa(SyncAPIClient):
+    capabilities: resources.Capabilities
     models: resources.Models
+    file_interpreter: resources.FileInterpreter
+    mainet: resources.Mainet
     with_raw_response: MaisaWithRawResponse
     with_streaming_response: MaisaWithStreamedResponse
 
     # client options
     api_key: str
-    username: str
-    password: str
 
     def __init__(
         self,
         *,
         api_key: str | None = None,
-        username: str | None = None,
-        password: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
@@ -80,10 +79,7 @@ class Maisa(SyncAPIClient):
     ) -> None:
         """Construct a new synchronous Maisa client instance.
 
-        This automatically infers the following arguments from their corresponding environment variables if they are not provided:
-        - `api_key` from `MAISA_API_KEY`
-        - `username` from `MAISA_USERNAME`
-        - `password` from `MAISA_PASSWORD`
+        This automatically infers the `api_key` argument from the `MAISA_API_KEY` environment variable if it is not provided.
         """
         if api_key is None:
             api_key = os.environ.get("MAISA_API_KEY")
@@ -92,22 +88,6 @@ class Maisa(SyncAPIClient):
                 "The api_key client option must be set either by passing api_key to the client or by setting the MAISA_API_KEY environment variable"
             )
         self.api_key = api_key
-
-        if username is None:
-            username = os.environ.get("MAISA_USERNAME")
-        if username is None:
-            raise MaisaError(
-                "The username client option must be set either by passing username to the client or by setting the MAISA_USERNAME environment variable"
-            )
-        self.username = username
-
-        if password is None:
-            password = os.environ.get("MAISA_PASSWORD")
-        if password is None:
-            raise MaisaError(
-                "The password client option must be set either by passing password to the client or by setting the MAISA_PASSWORD environment variable"
-            )
-        self.password = password
 
         if base_url is None:
             base_url = os.environ.get("MAISA_BASE_URL")
@@ -125,7 +105,10 @@ class Maisa(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
+        self.capabilities = resources.Capabilities(self)
         self.models = resources.Models(self)
+        self.file_interpreter = resources.FileInterpreter(self)
+        self.mainet = resources.Mainet(self)
         self.with_raw_response = MaisaWithRawResponse(self)
         self.with_streaming_response = MaisaWithStreamedResponse(self)
 
@@ -153,8 +136,6 @@ class Maisa(SyncAPIClient):
         self,
         *,
         api_key: str | None = None,
-        username: str | None = None,
-        password: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
         http_client: httpx.Client | None = None,
@@ -189,8 +170,6 @@ class Maisa(SyncAPIClient):
         http_client = http_client or self._client
         return self.__class__(
             api_key=api_key or self.api_key,
-            username=username or self.username,
-            password=password or self.password,
             base_url=base_url or self.base_url,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
@@ -239,21 +218,20 @@ class Maisa(SyncAPIClient):
 
 
 class AsyncMaisa(AsyncAPIClient):
+    capabilities: resources.AsyncCapabilities
     models: resources.AsyncModels
+    file_interpreter: resources.AsyncFileInterpreter
+    mainet: resources.AsyncMainet
     with_raw_response: AsyncMaisaWithRawResponse
     with_streaming_response: AsyncMaisaWithStreamedResponse
 
     # client options
     api_key: str
-    username: str
-    password: str
 
     def __init__(
         self,
         *,
         api_key: str | None = None,
-        username: str | None = None,
-        password: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
@@ -273,10 +251,7 @@ class AsyncMaisa(AsyncAPIClient):
     ) -> None:
         """Construct a new async Maisa client instance.
 
-        This automatically infers the following arguments from their corresponding environment variables if they are not provided:
-        - `api_key` from `MAISA_API_KEY`
-        - `username` from `MAISA_USERNAME`
-        - `password` from `MAISA_PASSWORD`
+        This automatically infers the `api_key` argument from the `MAISA_API_KEY` environment variable if it is not provided.
         """
         if api_key is None:
             api_key = os.environ.get("MAISA_API_KEY")
@@ -285,22 +260,6 @@ class AsyncMaisa(AsyncAPIClient):
                 "The api_key client option must be set either by passing api_key to the client or by setting the MAISA_API_KEY environment variable"
             )
         self.api_key = api_key
-
-        if username is None:
-            username = os.environ.get("MAISA_USERNAME")
-        if username is None:
-            raise MaisaError(
-                "The username client option must be set either by passing username to the client or by setting the MAISA_USERNAME environment variable"
-            )
-        self.username = username
-
-        if password is None:
-            password = os.environ.get("MAISA_PASSWORD")
-        if password is None:
-            raise MaisaError(
-                "The password client option must be set either by passing password to the client or by setting the MAISA_PASSWORD environment variable"
-            )
-        self.password = password
 
         if base_url is None:
             base_url = os.environ.get("MAISA_BASE_URL")
@@ -318,7 +277,10 @@ class AsyncMaisa(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
+        self.capabilities = resources.AsyncCapabilities(self)
         self.models = resources.AsyncModels(self)
+        self.file_interpreter = resources.AsyncFileInterpreter(self)
+        self.mainet = resources.AsyncMainet(self)
         self.with_raw_response = AsyncMaisaWithRawResponse(self)
         self.with_streaming_response = AsyncMaisaWithStreamedResponse(self)
 
@@ -346,8 +308,6 @@ class AsyncMaisa(AsyncAPIClient):
         self,
         *,
         api_key: str | None = None,
-        username: str | None = None,
-        password: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
         http_client: httpx.AsyncClient | None = None,
@@ -382,8 +342,6 @@ class AsyncMaisa(AsyncAPIClient):
         http_client = http_client or self._client
         return self.__class__(
             api_key=api_key or self.api_key,
-            username=username or self.username,
-            password=password or self.password,
             base_url=base_url or self.base_url,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
@@ -433,22 +391,34 @@ class AsyncMaisa(AsyncAPIClient):
 
 class MaisaWithRawResponse:
     def __init__(self, client: Maisa) -> None:
+        self.capabilities = resources.CapabilitiesWithRawResponse(client.capabilities)
         self.models = resources.ModelsWithRawResponse(client.models)
+        self.file_interpreter = resources.FileInterpreterWithRawResponse(client.file_interpreter)
+        self.mainet = resources.MainetWithRawResponse(client.mainet)
 
 
 class AsyncMaisaWithRawResponse:
     def __init__(self, client: AsyncMaisa) -> None:
+        self.capabilities = resources.AsyncCapabilitiesWithRawResponse(client.capabilities)
         self.models = resources.AsyncModelsWithRawResponse(client.models)
+        self.file_interpreter = resources.AsyncFileInterpreterWithRawResponse(client.file_interpreter)
+        self.mainet = resources.AsyncMainetWithRawResponse(client.mainet)
 
 
 class MaisaWithStreamedResponse:
     def __init__(self, client: Maisa) -> None:
+        self.capabilities = resources.CapabilitiesWithStreamingResponse(client.capabilities)
         self.models = resources.ModelsWithStreamingResponse(client.models)
+        self.file_interpreter = resources.FileInterpreterWithStreamingResponse(client.file_interpreter)
+        self.mainet = resources.MainetWithStreamingResponse(client.mainet)
 
 
 class AsyncMaisaWithStreamedResponse:
     def __init__(self, client: AsyncMaisa) -> None:
+        self.capabilities = resources.AsyncCapabilitiesWithStreamingResponse(client.capabilities)
         self.models = resources.AsyncModelsWithStreamingResponse(client.models)
+        self.file_interpreter = resources.AsyncFileInterpreterWithStreamingResponse(client.file_interpreter)
+        self.mainet = resources.AsyncMainetWithStreamingResponse(client.mainet)
 
 
 Client = Maisa

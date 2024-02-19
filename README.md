@@ -27,15 +27,12 @@ from maisa import Maisa
 client = Maisa(
     # This is the default and can be omitted
     api_key=os.environ.get("MAISA_API_KEY"),
-    username="My Username",
-    password="My Password",
 )
 
-model_rerank_response = client.models.rerank(
-    sentences=["The light bulb was invented by Thomas Edison", "It's a nice day, isn't it"],
-    source_sentence="Who invented the light bulb?",
+embeddings = client.models.embeddings.create(
+    texts=["string"],
 )
-print(model_rerank_response.sorted_sentences)
+print(embeddings.embeddings)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -55,17 +52,14 @@ from maisa import AsyncMaisa
 client = AsyncMaisa(
     # This is the default and can be omitted
     api_key=os.environ.get("MAISA_API_KEY"),
-    username="My Username",
-    password="My Password",
 )
 
 
 async def main() -> None:
-    model_rerank_response = await client.models.rerank(
-        sentences=["The light bulb was invented by Thomas Edison", "It's a nice day, isn't it"],
-        source_sentence="Who invented the light bulb?",
+    embeddings = await client.models.embeddings.create(
+        texts=["string"],
     )
-    print(model_rerank_response.sorted_sentences)
+    print(embeddings.embeddings)
 
 
 asyncio.run(main())
@@ -95,15 +89,11 @@ All errors inherit from `maisa.APIError`.
 import maisa
 from maisa import Maisa
 
-client = Maisa(
-    username="My Username",
-    password="My Password",
-)
+client = Maisa()
 
 try:
-    client.models.rerank(
-        sentences=["The light bulb was invented by Thomas Edison", "It's a nice day, isn't it"],
-        source_sentence="Who invented the light bulb?",
+    client.models.embeddings.create(
+        texts=["string"],
     )
 except maisa.APIConnectionError as e:
     print("The server could not be reached")
@@ -144,14 +134,11 @@ from maisa import Maisa
 client = Maisa(
     # default is 2
     max_retries=0,
-    username="My Username",
-    password="My Password",
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).models.rerank(
-    sentences=["The light bulb was invented by Thomas Edison", "It's a nice day, isn't it"],
-    source_sentence="Who invented the light bulb?",
+client.with_options(max_retries=5).models.embeddings.create(
+    texts=["string"],
 )
 ```
 
@@ -167,21 +154,16 @@ from maisa import Maisa
 client = Maisa(
     # 20 seconds (default is 1 minute)
     timeout=20.0,
-    username="My Username",
-    password="My Password",
 )
 
 # More granular control:
 client = Maisa(
     timeout=httpx.Timeout(60.0, read=5.0, write=10.0, connect=2.0),
-    username="My Username",
-    password="My Password",
 )
 
 # Override per-request:
-client.with_options(timeout=5 * 1000).models.rerank(
-    sentences=["The light bulb was invented by Thomas Edison", "It's a nice day, isn't it"],
-    source_sentence="Who invented the light bulb?",
+client.with_options(timeout=5 * 1000).models.embeddings.create(
+    texts=["string"],
 )
 ```
 
@@ -220,23 +202,19 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 ```py
 from maisa import Maisa
 
-client = Maisa(
-    username="My Username",
-    password="My Password",
-)
-response = client.models.with_raw_response.rerank(
-    sentences=["The light bulb was invented by Thomas Edison", "It's a nice day, isn't it"],
-    source_sentence="Who invented the light bulb?",
+client = Maisa()
+response = client.models.embeddings.with_raw_response.create(
+    texts=["string"],
 )
 print(response.headers.get('X-My-Header'))
 
-model = response.parse()  # get the object that `models.rerank()` would have returned
-print(model.sorted_sentences)
+embedding = response.parse()  # get the object that `models.embeddings.create()` would have returned
+print(embedding.embeddings)
 ```
 
-These methods return an [`APIResponse`](https://github.com/clibrain/python-sdk/tree/main/src/maisa/_response.py) object.
+These methods return an [`APIResponse`](https://github.com/clibrain/python-sdk/tree/stainless/src/maisa/_response.py) object.
 
-The async client returns an [`AsyncAPIResponse`](https://github.com/clibrain/python-sdk/tree/main/src/maisa/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
+The async client returns an [`AsyncAPIResponse`](https://github.com/clibrain/python-sdk/tree/stainless/src/maisa/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
 
 #### `.with_streaming_response`
 
@@ -245,9 +223,8 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.models.with_streaming_response.rerank(
-    sentences=["The light bulb was invented by Thomas Edison", "It's a nice day, isn't it"],
-    source_sentence="Who invented the light bulb?",
+with client.models.embeddings.with_streaming_response.create(
+    texts=["string"],
 ) as response:
     print(response.headers.get("X-My-Header"))
 
@@ -276,8 +253,6 @@ client = Maisa(
         proxies="http://my.test.proxy.example.com",
         transport=httpx.HTTPTransport(local_address="0.0.0.0"),
     ),
-    username="My Username",
-    password="My Password",
 )
 ```
 
