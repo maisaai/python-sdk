@@ -771,22 +771,16 @@ class TestMaisa:
     @mock.patch("maisa._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/v1/ai/compare").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.post("/v1/models/rerank").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
             self.client.post(
-                "/v1/ai/compare",
+                "/v1/models/rerank",
                 body=cast(
                     object,
                     dict(
-                        text1="Lorem Ipsum dolor sit amet",
-                        text2="Sed ut perspiciatis unde omnis",
-                        variables={
-                            "name": {
-                                "type": "string",
-                                "description": "The name of the person.",
-                            }
-                        },
+                        sentences=["The light bulb was invented by Thomas Edison", "It's a nice day, isn't it"],
+                        source_sentence="Who invented the light bulb?",
                     ),
                 ),
                 cast_to=httpx.Response,
@@ -798,22 +792,16 @@ class TestMaisa:
     @mock.patch("maisa._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/v1/ai/compare").mock(return_value=httpx.Response(500))
+        respx_mock.post("/v1/models/rerank").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
             self.client.post(
-                "/v1/ai/compare",
+                "/v1/models/rerank",
                 body=cast(
                     object,
                     dict(
-                        text1="Lorem Ipsum dolor sit amet",
-                        text2="Sed ut perspiciatis unde omnis",
-                        variables={
-                            "name": {
-                                "type": "string",
-                                "description": "The name of the person.",
-                            }
-                        },
+                        sentences=["The light bulb was invented by Thomas Edison", "It's a nice day, isn't it"],
+                        source_sentence="Who invented the light bulb?",
                     ),
                 ),
                 cast_to=httpx.Response,
@@ -1551,22 +1539,16 @@ class TestAsyncMaisa:
     @mock.patch("maisa._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/v1/ai/compare").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.post("/v1/models/rerank").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
             await self.client.post(
-                "/v1/ai/compare",
+                "/v1/models/rerank",
                 body=cast(
                     object,
                     dict(
-                        text1="Lorem Ipsum dolor sit amet",
-                        text2="Sed ut perspiciatis unde omnis",
-                        variables={
-                            "name": {
-                                "type": "string",
-                                "description": "The name of the person.",
-                            }
-                        },
+                        sentences=["The light bulb was invented by Thomas Edison", "It's a nice day, isn't it"],
+                        source_sentence="Who invented the light bulb?",
                     ),
                 ),
                 cast_to=httpx.Response,
@@ -1578,22 +1560,16 @@ class TestAsyncMaisa:
     @mock.patch("maisa._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/v1/ai/compare").mock(return_value=httpx.Response(500))
+        respx_mock.post("/v1/models/rerank").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
             await self.client.post(
-                "/v1/ai/compare",
+                "/v1/models/rerank",
                 body=cast(
                     object,
                     dict(
-                        text1="Lorem Ipsum dolor sit amet",
-                        text2="Sed ut perspiciatis unde omnis",
-                        variables={
-                            "name": {
-                                "type": "string",
-                                "description": "The name of the person.",
-                            }
-                        },
+                        sentences=["The light bulb was invented by Thomas Edison", "It's a nice day, isn't it"],
+                        source_sentence="Who invented the light bulb?",
                     ),
                 ),
                 cast_to=httpx.Response,

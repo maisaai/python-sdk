@@ -1,6 +1,6 @@
 # Maisa Python API library
 
-[![PyPI version](https://img.shields.io/pypi/v/Maisa.svg)](https://pypi.org/project/Maisa/)
+[![PyPI version](https://img.shields.io/pypi/v/maisa.svg)](https://pypi.org/project/maisa/)
 
 The Maisa Python library provides convenient access to the Maisa REST API from any Python 3.7+
 application. The library includes type definitions for all request params and response fields,
@@ -13,7 +13,7 @@ The REST API documentation can be found [on maisa.ai](https://maisa.ai/). The fu
 ## Installation
 
 ```sh
-pip install --pre Maisa
+pip install --pre maisa
 ```
 
 ## Usage
@@ -31,17 +31,11 @@ client = Maisa(
     password="My Password",
 )
 
-ai_compare_response = client.ai.compare(
-    text1="Lorem Ipsum dolor sit amet",
-    text2="Sed ut perspiciatis unde omnis",
-    variables={
-        "name": {
-            "type": "string",
-            "description": "The name of the person.",
-        }
-    },
+model_rerank_response = client.models.rerank(
+    sentences=["The light bulb was invented by Thomas Edison", "It's a nice day, isn't it"],
+    source_sentence="Who invented the light bulb?",
 )
-print(ai_compare_response.extracted_data)
+print(model_rerank_response.sorted_sentences)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -67,17 +61,11 @@ client = AsyncMaisa(
 
 
 async def main() -> None:
-    ai_compare_response = await client.ai.compare(
-        text1="Lorem Ipsum dolor sit amet",
-        text2="Sed ut perspiciatis unde omnis",
-        variables={
-            "name": {
-                "type": "string",
-                "description": "The name of the person.",
-            }
-        },
+    model_rerank_response = await client.models.rerank(
+        sentences=["The light bulb was invented by Thomas Edison", "It's a nice day, isn't it"],
+        source_sentence="Who invented the light bulb?",
     )
-    print(ai_compare_response.extracted_data)
+    print(model_rerank_response.sorted_sentences)
 
 
 asyncio.run(main())
@@ -113,15 +101,9 @@ client = Maisa(
 )
 
 try:
-    client.ai.compare(
-        text1="Lorem Ipsum dolor sit amet",
-        text2="Sed ut perspiciatis unde omnis",
-        variables={
-            "name": {
-                "type": "string",
-                "description": "The name of the person.",
-            }
-        },
+    client.models.rerank(
+        sentences=["The light bulb was invented by Thomas Edison", "It's a nice day, isn't it"],
+        source_sentence="Who invented the light bulb?",
     )
 except maisa.APIConnectionError as e:
     print("The server could not be reached")
@@ -167,15 +149,9 @@ client = Maisa(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).ai.compare(
-    text1="Lorem Ipsum dolor sit amet",
-    text2="Sed ut perspiciatis unde omnis",
-    variables={
-        "name": {
-            "type": "string",
-            "description": "The name of the person.",
-        }
-    },
+client.with_options(max_retries=5).models.rerank(
+    sentences=["The light bulb was invented by Thomas Edison", "It's a nice day, isn't it"],
+    source_sentence="Who invented the light bulb?",
 )
 ```
 
@@ -203,15 +179,9 @@ client = Maisa(
 )
 
 # Override per-request:
-client.with_options(timeout=5 * 1000).ai.compare(
-    text1="Lorem Ipsum dolor sit amet",
-    text2="Sed ut perspiciatis unde omnis",
-    variables={
-        "name": {
-            "type": "string",
-            "description": "The name of the person.",
-        }
-    },
+client.with_options(timeout=5 * 1000).models.rerank(
+    sentences=["The light bulb was invented by Thomas Edison", "It's a nice day, isn't it"],
+    source_sentence="Who invented the light bulb?",
 )
 ```
 
@@ -254,25 +224,19 @@ client = Maisa(
     username="My Username",
     password="My Password",
 )
-response = client.ai.with_raw_response.compare(
-    text1="Lorem Ipsum dolor sit amet",
-    text2="Sed ut perspiciatis unde omnis",
-    variables={
-        "name": {
-            "type": "string",
-            "description": "The name of the person.",
-        }
-    },
+response = client.models.with_raw_response.rerank(
+    sentences=["The light bulb was invented by Thomas Edison", "It's a nice day, isn't it"],
+    source_sentence="Who invented the light bulb?",
 )
 print(response.headers.get('X-My-Header'))
 
-ai = response.parse()  # get the object that `ai.compare()` would have returned
-print(ai.extracted_data)
+model = response.parse()  # get the object that `models.rerank()` would have returned
+print(model.sorted_sentences)
 ```
 
-These methods return an [`APIResponse`](https://github.com/stainless-sdks/tree/main/src/maisa/_response.py) object.
+These methods return an [`APIResponse`](https://github.com/clibrain/python-sdk/tree/main/src/maisa/_response.py) object.
 
-The async client returns an [`AsyncAPIResponse`](https://github.com/stainless-sdks/tree/main/src/maisa/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
+The async client returns an [`AsyncAPIResponse`](https://github.com/clibrain/python-sdk/tree/main/src/maisa/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
 
 #### `.with_streaming_response`
 
@@ -281,15 +245,9 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.ai.with_streaming_response.compare(
-    text1="Lorem Ipsum dolor sit amet",
-    text2="Sed ut perspiciatis unde omnis",
-    variables={
-        "name": {
-            "type": "string",
-            "description": "The name of the person.",
-        }
-    },
+with client.models.with_streaming_response.rerank(
+    sentences=["The light bulb was invented by Thomas Edison", "It's a nice day, isn't it"],
+    source_sentence="Who invented the light bulb?",
 ) as response:
     print(response.headers.get("X-My-Header"))
 
@@ -337,7 +295,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/stainless-sdks/Maisa-python/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/clibrain/python-sdk/issues) with questions, bugs, or suggestions.
 
 ## Requirements
 
