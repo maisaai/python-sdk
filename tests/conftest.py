@@ -27,8 +27,6 @@ def event_loop() -> Iterator[asyncio.AbstractEventLoop]:
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
 api_key = "My API Key"
-username = "My Username"
-password = "My Password"
 
 
 @pytest.fixture(scope="session")
@@ -37,9 +35,7 @@ def client(request: FixtureRequest) -> Iterator[Maisa]:
     if not isinstance(strict, bool):
         raise TypeError(f"Unexpected fixture parameter type {type(strict)}, expected {bool}")
 
-    with Maisa(
-        base_url=base_url, api_key=api_key, username=username, password=password, _strict_response_validation=strict
-    ) as client:
+    with Maisa(base_url=base_url, api_key=api_key, _strict_response_validation=strict) as client:
         yield client
 
 
@@ -49,7 +45,5 @@ async def async_client(request: FixtureRequest) -> AsyncIterator[AsyncMaisa]:
     if not isinstance(strict, bool):
         raise TypeError(f"Unexpected fixture parameter type {type(strict)}, expected {bool}")
 
-    async with AsyncMaisa(
-        base_url=base_url, api_key=api_key, username=username, password=password, _strict_response_validation=strict
-    ) as client:
+    async with AsyncMaisa(base_url=base_url, api_key=api_key, _strict_response_validation=strict) as client:
         yield client

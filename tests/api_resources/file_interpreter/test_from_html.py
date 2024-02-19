@@ -9,76 +9,75 @@ import pytest
 
 from maisa import Maisa, AsyncMaisa
 from tests.utils import assert_matches_type
-from maisa.types.models import Embeddings
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
 
-class TestEmbeddings:
+class TestFromHTML:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
     def test_method_create(self, client: Maisa) -> None:
-        embedding = client.models.embeddings.create(
-            texts=["string"],
+        from_html = client.file_interpreter.from_html.create(
+            file=b"raw file contents",
         )
-        assert_matches_type(Embeddings, embedding, path=["response"])
+        assert_matches_type(object, from_html, path=["response"])
 
     @parametrize
     def test_raw_response_create(self, client: Maisa) -> None:
-        response = client.models.embeddings.with_raw_response.create(
-            texts=["string"],
+        response = client.file_interpreter.from_html.with_raw_response.create(
+            file=b"raw file contents",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        embedding = response.parse()
-        assert_matches_type(Embeddings, embedding, path=["response"])
+        from_html = response.parse()
+        assert_matches_type(object, from_html, path=["response"])
 
     @parametrize
     def test_streaming_response_create(self, client: Maisa) -> None:
-        with client.models.embeddings.with_streaming_response.create(
-            texts=["string"],
+        with client.file_interpreter.from_html.with_streaming_response.create(
+            file=b"raw file contents",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            embedding = response.parse()
-            assert_matches_type(Embeddings, embedding, path=["response"])
+            from_html = response.parse()
+            assert_matches_type(object, from_html, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
 
-class TestAsyncEmbeddings:
+class TestAsyncFromHTML:
     parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
     async def test_method_create(self, async_client: AsyncMaisa) -> None:
-        embedding = await async_client.models.embeddings.create(
-            texts=["string"],
+        from_html = await async_client.file_interpreter.from_html.create(
+            file=b"raw file contents",
         )
-        assert_matches_type(Embeddings, embedding, path=["response"])
+        assert_matches_type(object, from_html, path=["response"])
 
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncMaisa) -> None:
-        response = await async_client.models.embeddings.with_raw_response.create(
-            texts=["string"],
+        response = await async_client.file_interpreter.from_html.with_raw_response.create(
+            file=b"raw file contents",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        embedding = await response.parse()
-        assert_matches_type(Embeddings, embedding, path=["response"])
+        from_html = await response.parse()
+        assert_matches_type(object, from_html, path=["response"])
 
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncMaisa) -> None:
-        async with async_client.models.embeddings.with_streaming_response.create(
-            texts=["string"],
+        async with async_client.file_interpreter.from_html.with_streaming_response.create(
+            file=b"raw file contents",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            embedding = await response.parse()
-            assert_matches_type(Embeddings, embedding, path=["response"])
+            from_html = await response.parse()
+            assert_matches_type(object, from_html, path=["response"])
 
         assert cast(Any, response.is_closed) is True

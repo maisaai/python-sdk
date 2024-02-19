@@ -8,6 +8,14 @@ from .models import (
     ModelsWithStreamingResponse,
     AsyncModelsWithStreamingResponse,
 )
+from .rerank import (
+    RerankResource,
+    AsyncRerankResource,
+    RerankResourceWithRawResponse,
+    AsyncRerankResourceWithRawResponse,
+    RerankResourceWithStreamingResponse,
+    AsyncRerankResourceWithStreamingResponse,
+)
 from .embeddings import (
     Embeddings,
     AsyncEmbeddings,
@@ -24,6 +32,12 @@ __all__ = [
     "AsyncEmbeddingsWithRawResponse",
     "EmbeddingsWithStreamingResponse",
     "AsyncEmbeddingsWithStreamingResponse",
+    "RerankResource",
+    "AsyncRerankResource",
+    "RerankResourceWithRawResponse",
+    "AsyncRerankResourceWithRawResponse",
+    "RerankResourceWithStreamingResponse",
+    "AsyncRerankResourceWithStreamingResponse",
     "Models",
     "AsyncModels",
     "ModelsWithRawResponse",
