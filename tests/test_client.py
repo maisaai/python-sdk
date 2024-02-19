@@ -27,8 +27,6 @@ from .utils import update_env
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 api_key = "My API Key"
-username = "My Username"
-password = "My Password"
 
 
 def _get_params(client: BaseClient[Any, Any]) -> dict[str, str]:
@@ -50,9 +48,7 @@ def _get_open_connections(client: Maisa | AsyncMaisa) -> int:
 
 
 class TestMaisa:
-    client = Maisa(
-        base_url=base_url, api_key=api_key, username=username, password=password, _strict_response_validation=True
-    )
+    client = Maisa(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
     @pytest.mark.respx(base_url=base_url)
     def test_raw_response(self, respx_mock: MockRouter) -> None:
@@ -82,14 +78,6 @@ class TestMaisa:
         assert copied.api_key == "another My API Key"
         assert self.client.api_key == "My API Key"
 
-        copied = self.client.copy(username="another My Username")
-        assert copied.username == "another My Username"
-        assert self.client.username == "My Username"
-
-        copied = self.client.copy(password="another My Password")
-        assert copied.password == "another My Password"
-        assert self.client.password == "My Password"
-
     def test_copy_default_options(self) -> None:
         # options that have a default are overridden correctly
         copied = self.client.copy(max_retries=7)
@@ -108,12 +96,7 @@ class TestMaisa:
 
     def test_copy_default_headers(self) -> None:
         client = Maisa(
-            base_url=base_url,
-            api_key=api_key,
-            username=username,
-            password=password,
-            _strict_response_validation=True,
-            default_headers={"X-Foo": "bar"},
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
         )
         assert client.default_headers["X-Foo"] == "bar"
 
@@ -147,12 +130,7 @@ class TestMaisa:
 
     def test_copy_default_query(self) -> None:
         client = Maisa(
-            base_url=base_url,
-            api_key=api_key,
-            username=username,
-            password=password,
-            _strict_response_validation=True,
-            default_query={"foo": "bar"},
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"foo": "bar"}
         )
         assert _get_params(client)["foo"] == "bar"
 
@@ -276,14 +254,7 @@ class TestMaisa:
         assert timeout == httpx.Timeout(100.0)
 
     def test_client_timeout_option(self) -> None:
-        client = Maisa(
-            base_url=base_url,
-            api_key=api_key,
-            username=username,
-            password=password,
-            _strict_response_validation=True,
-            timeout=httpx.Timeout(0),
-        )
+        client = Maisa(base_url=base_url, api_key=api_key, _strict_response_validation=True, timeout=httpx.Timeout(0))
 
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         timeout = httpx.Timeout(**request.extensions["timeout"])  # type: ignore
@@ -293,12 +264,7 @@ class TestMaisa:
         # custom timeout given to the httpx client should be used
         with httpx.Client(timeout=None) as http_client:
             client = Maisa(
-                base_url=base_url,
-                api_key=api_key,
-                username=username,
-                password=password,
-                _strict_response_validation=True,
-                http_client=http_client,
+                base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -308,12 +274,7 @@ class TestMaisa:
         # no timeout given to the httpx client should not use the httpx default
         with httpx.Client() as http_client:
             client = Maisa(
-                base_url=base_url,
-                api_key=api_key,
-                username=username,
-                password=password,
-                _strict_response_validation=True,
-                http_client=http_client,
+                base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -323,12 +284,7 @@ class TestMaisa:
         # explicitly passing the default timeout currently results in it being ignored
         with httpx.Client(timeout=HTTPX_DEFAULT_TIMEOUT) as http_client:
             client = Maisa(
-                base_url=base_url,
-                api_key=api_key,
-                username=username,
-                password=password,
-                _strict_response_validation=True,
-                http_client=http_client,
+                base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -337,12 +293,7 @@ class TestMaisa:
 
     def test_default_headers_option(self) -> None:
         client = Maisa(
-            base_url=base_url,
-            api_key=api_key,
-            username=username,
-            password=password,
-            _strict_response_validation=True,
-            default_headers={"X-Foo": "bar"},
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
         )
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("x-foo") == "bar"
@@ -351,8 +302,6 @@ class TestMaisa:
         client2 = Maisa(
             base_url=base_url,
             api_key=api_key,
-            username=username,
-            password=password,
             _strict_response_validation=True,
             default_headers={
                 "X-Foo": "stainless",
@@ -365,12 +314,7 @@ class TestMaisa:
 
     def test_default_query_option(self) -> None:
         client = Maisa(
-            base_url=base_url,
-            api_key=api_key,
-            username=username,
-            password=password,
-            _strict_response_validation=True,
-            default_query={"query_param": "bar"},
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"query_param": "bar"}
         )
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         url = httpx.URL(request.url)
@@ -570,13 +514,7 @@ class TestMaisa:
         assert response.foo == 2
 
     def test_base_url_setter(self) -> None:
-        client = Maisa(
-            base_url="https://example.com/from_init",
-            api_key=api_key,
-            username=username,
-            password=password,
-            _strict_response_validation=True,
-        )
+        client = Maisa(base_url="https://example.com/from_init", api_key=api_key, _strict_response_validation=True)
         assert client.base_url == "https://example.com/from_init/"
 
         client.base_url = "https://example.com/from_setter"  # type: ignore[assignment]
@@ -585,24 +523,16 @@ class TestMaisa:
 
     def test_base_url_env(self) -> None:
         with update_env(MAISA_BASE_URL="http://localhost:5000/from/env"):
-            client = Maisa(api_key=api_key, username=username, password=password, _strict_response_validation=True)
+            client = Maisa(api_key=api_key, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
 
     @pytest.mark.parametrize(
         "client",
         [
+            Maisa(base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True),
             Maisa(
                 base_url="http://localhost:5000/custom/path/",
                 api_key=api_key,
-                username=username,
-                password=password,
-                _strict_response_validation=True,
-            ),
-            Maisa(
-                base_url="http://localhost:5000/custom/path/",
-                api_key=api_key,
-                username=username,
-                password=password,
                 _strict_response_validation=True,
                 http_client=httpx.Client(),
             ),
@@ -622,18 +552,10 @@ class TestMaisa:
     @pytest.mark.parametrize(
         "client",
         [
+            Maisa(base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True),
             Maisa(
                 base_url="http://localhost:5000/custom/path/",
                 api_key=api_key,
-                username=username,
-                password=password,
-                _strict_response_validation=True,
-            ),
-            Maisa(
-                base_url="http://localhost:5000/custom/path/",
-                api_key=api_key,
-                username=username,
-                password=password,
                 _strict_response_validation=True,
                 http_client=httpx.Client(),
             ),
@@ -653,18 +575,10 @@ class TestMaisa:
     @pytest.mark.parametrize(
         "client",
         [
+            Maisa(base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True),
             Maisa(
                 base_url="http://localhost:5000/custom/path/",
                 api_key=api_key,
-                username=username,
-                password=password,
-                _strict_response_validation=True,
-            ),
-            Maisa(
-                base_url="http://localhost:5000/custom/path/",
-                api_key=api_key,
-                username=username,
-                password=password,
                 _strict_response_validation=True,
                 http_client=httpx.Client(),
             ),
@@ -682,9 +596,7 @@ class TestMaisa:
         assert request.url == "https://myapi.com/foo"
 
     def test_copied_client_does_not_close_http(self) -> None:
-        client = Maisa(
-            base_url=base_url, api_key=api_key, username=username, password=password, _strict_response_validation=True
-        )
+        client = Maisa(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         assert not client.is_closed()
 
         copied = client.copy()
@@ -695,9 +607,7 @@ class TestMaisa:
         assert not client.is_closed()
 
     def test_client_context_manager(self) -> None:
-        client = Maisa(
-            base_url=base_url, api_key=api_key, username=username, password=password, _strict_response_validation=True
-        )
+        client = Maisa(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         with client as c2:
             assert c2 is client
             assert not c2.is_closed()
@@ -723,16 +633,12 @@ class TestMaisa:
 
         respx_mock.get("/foo").mock(return_value=httpx.Response(200, text="my-custom-format"))
 
-        strict_client = Maisa(
-            base_url=base_url, api_key=api_key, username=username, password=password, _strict_response_validation=True
-        )
+        strict_client = Maisa(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
         with pytest.raises(APIResponseValidationError):
             strict_client.get("/foo", cast_to=Model)
 
-        client = Maisa(
-            base_url=base_url, api_key=api_key, username=username, password=password, _strict_response_validation=False
-        )
+        client = Maisa(base_url=base_url, api_key=api_key, _strict_response_validation=False)
 
         response = client.get("/foo", cast_to=Model)
         assert isinstance(response, str)  # type: ignore[unreachable]
@@ -759,9 +665,7 @@ class TestMaisa:
     )
     @mock.patch("time.time", mock.MagicMock(return_value=1696004797))
     def test_parse_retry_after_header(self, remaining_retries: int, retry_after: str, timeout: float) -> None:
-        client = Maisa(
-            base_url=base_url, api_key=api_key, username=username, password=password, _strict_response_validation=True
-        )
+        client = Maisa(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
         headers = httpx.Headers({"retry-after": retry_after})
         options = FinalRequestOptions(method="get", url="/foo", max_retries=3)
@@ -771,18 +675,12 @@ class TestMaisa:
     @mock.patch("maisa._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/v1/models/rerank").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.post("/v1/models/embeddings").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
             self.client.post(
-                "/v1/models/rerank",
-                body=cast(
-                    object,
-                    dict(
-                        sentences=["The light bulb was invented by Thomas Edison", "It's a nice day, isn't it"],
-                        source_sentence="Who invented the light bulb?",
-                    ),
-                ),
+                "/v1/models/embeddings",
+                body=cast(object, dict(texts=["string"])),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -792,18 +690,12 @@ class TestMaisa:
     @mock.patch("maisa._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/v1/models/rerank").mock(return_value=httpx.Response(500))
+        respx_mock.post("/v1/models/embeddings").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
             self.client.post(
-                "/v1/models/rerank",
-                body=cast(
-                    object,
-                    dict(
-                        sentences=["The light bulb was invented by Thomas Edison", "It's a nice day, isn't it"],
-                        source_sentence="Who invented the light bulb?",
-                    ),
-                ),
+                "/v1/models/embeddings",
+                body=cast(object, dict(texts=["string"])),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -812,9 +704,7 @@ class TestMaisa:
 
 
 class TestAsyncMaisa:
-    client = AsyncMaisa(
-        base_url=base_url, api_key=api_key, username=username, password=password, _strict_response_validation=True
-    )
+    client = AsyncMaisa(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.asyncio
@@ -846,14 +736,6 @@ class TestAsyncMaisa:
         assert copied.api_key == "another My API Key"
         assert self.client.api_key == "My API Key"
 
-        copied = self.client.copy(username="another My Username")
-        assert copied.username == "another My Username"
-        assert self.client.username == "My Username"
-
-        copied = self.client.copy(password="another My Password")
-        assert copied.password == "another My Password"
-        assert self.client.password == "My Password"
-
     def test_copy_default_options(self) -> None:
         # options that have a default are overridden correctly
         copied = self.client.copy(max_retries=7)
@@ -872,12 +754,7 @@ class TestAsyncMaisa:
 
     def test_copy_default_headers(self) -> None:
         client = AsyncMaisa(
-            base_url=base_url,
-            api_key=api_key,
-            username=username,
-            password=password,
-            _strict_response_validation=True,
-            default_headers={"X-Foo": "bar"},
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
         )
         assert client.default_headers["X-Foo"] == "bar"
 
@@ -911,12 +788,7 @@ class TestAsyncMaisa:
 
     def test_copy_default_query(self) -> None:
         client = AsyncMaisa(
-            base_url=base_url,
-            api_key=api_key,
-            username=username,
-            password=password,
-            _strict_response_validation=True,
-            default_query={"foo": "bar"},
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"foo": "bar"}
         )
         assert _get_params(client)["foo"] == "bar"
 
@@ -1041,12 +913,7 @@ class TestAsyncMaisa:
 
     async def test_client_timeout_option(self) -> None:
         client = AsyncMaisa(
-            base_url=base_url,
-            api_key=api_key,
-            username=username,
-            password=password,
-            _strict_response_validation=True,
-            timeout=httpx.Timeout(0),
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, timeout=httpx.Timeout(0)
         )
 
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -1057,12 +924,7 @@ class TestAsyncMaisa:
         # custom timeout given to the httpx client should be used
         async with httpx.AsyncClient(timeout=None) as http_client:
             client = AsyncMaisa(
-                base_url=base_url,
-                api_key=api_key,
-                username=username,
-                password=password,
-                _strict_response_validation=True,
-                http_client=http_client,
+                base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -1072,12 +934,7 @@ class TestAsyncMaisa:
         # no timeout given to the httpx client should not use the httpx default
         async with httpx.AsyncClient() as http_client:
             client = AsyncMaisa(
-                base_url=base_url,
-                api_key=api_key,
-                username=username,
-                password=password,
-                _strict_response_validation=True,
-                http_client=http_client,
+                base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -1087,12 +944,7 @@ class TestAsyncMaisa:
         # explicitly passing the default timeout currently results in it being ignored
         async with httpx.AsyncClient(timeout=HTTPX_DEFAULT_TIMEOUT) as http_client:
             client = AsyncMaisa(
-                base_url=base_url,
-                api_key=api_key,
-                username=username,
-                password=password,
-                _strict_response_validation=True,
-                http_client=http_client,
+                base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -1101,12 +953,7 @@ class TestAsyncMaisa:
 
     def test_default_headers_option(self) -> None:
         client = AsyncMaisa(
-            base_url=base_url,
-            api_key=api_key,
-            username=username,
-            password=password,
-            _strict_response_validation=True,
-            default_headers={"X-Foo": "bar"},
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
         )
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("x-foo") == "bar"
@@ -1115,8 +962,6 @@ class TestAsyncMaisa:
         client2 = AsyncMaisa(
             base_url=base_url,
             api_key=api_key,
-            username=username,
-            password=password,
             _strict_response_validation=True,
             default_headers={
                 "X-Foo": "stainless",
@@ -1129,12 +974,7 @@ class TestAsyncMaisa:
 
     def test_default_query_option(self) -> None:
         client = AsyncMaisa(
-            base_url=base_url,
-            api_key=api_key,
-            username=username,
-            password=password,
-            _strict_response_validation=True,
-            default_query={"query_param": "bar"},
+            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"query_param": "bar"}
         )
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         url = httpx.URL(request.url)
@@ -1334,13 +1174,7 @@ class TestAsyncMaisa:
         assert response.foo == 2
 
     def test_base_url_setter(self) -> None:
-        client = AsyncMaisa(
-            base_url="https://example.com/from_init",
-            api_key=api_key,
-            username=username,
-            password=password,
-            _strict_response_validation=True,
-        )
+        client = AsyncMaisa(base_url="https://example.com/from_init", api_key=api_key, _strict_response_validation=True)
         assert client.base_url == "https://example.com/from_init/"
 
         client.base_url = "https://example.com/from_setter"  # type: ignore[assignment]
@@ -1349,24 +1183,18 @@ class TestAsyncMaisa:
 
     def test_base_url_env(self) -> None:
         with update_env(MAISA_BASE_URL="http://localhost:5000/from/env"):
-            client = AsyncMaisa(api_key=api_key, username=username, password=password, _strict_response_validation=True)
+            client = AsyncMaisa(api_key=api_key, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
 
     @pytest.mark.parametrize(
         "client",
         [
             AsyncMaisa(
-                base_url="http://localhost:5000/custom/path/",
-                api_key=api_key,
-                username=username,
-                password=password,
-                _strict_response_validation=True,
+                base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
             ),
             AsyncMaisa(
                 base_url="http://localhost:5000/custom/path/",
                 api_key=api_key,
-                username=username,
-                password=password,
                 _strict_response_validation=True,
                 http_client=httpx.AsyncClient(),
             ),
@@ -1387,17 +1215,11 @@ class TestAsyncMaisa:
         "client",
         [
             AsyncMaisa(
-                base_url="http://localhost:5000/custom/path/",
-                api_key=api_key,
-                username=username,
-                password=password,
-                _strict_response_validation=True,
+                base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
             ),
             AsyncMaisa(
                 base_url="http://localhost:5000/custom/path/",
                 api_key=api_key,
-                username=username,
-                password=password,
                 _strict_response_validation=True,
                 http_client=httpx.AsyncClient(),
             ),
@@ -1418,17 +1240,11 @@ class TestAsyncMaisa:
         "client",
         [
             AsyncMaisa(
-                base_url="http://localhost:5000/custom/path/",
-                api_key=api_key,
-                username=username,
-                password=password,
-                _strict_response_validation=True,
+                base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
             ),
             AsyncMaisa(
                 base_url="http://localhost:5000/custom/path/",
                 api_key=api_key,
-                username=username,
-                password=password,
                 _strict_response_validation=True,
                 http_client=httpx.AsyncClient(),
             ),
@@ -1446,9 +1262,7 @@ class TestAsyncMaisa:
         assert request.url == "https://myapi.com/foo"
 
     async def test_copied_client_does_not_close_http(self) -> None:
-        client = AsyncMaisa(
-            base_url=base_url, api_key=api_key, username=username, password=password, _strict_response_validation=True
-        )
+        client = AsyncMaisa(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         assert not client.is_closed()
 
         copied = client.copy()
@@ -1460,9 +1274,7 @@ class TestAsyncMaisa:
         assert not client.is_closed()
 
     async def test_client_context_manager(self) -> None:
-        client = AsyncMaisa(
-            base_url=base_url, api_key=api_key, username=username, password=password, _strict_response_validation=True
-        )
+        client = AsyncMaisa(base_url=base_url, api_key=api_key, _strict_response_validation=True)
         async with client as c2:
             assert c2 is client
             assert not c2.is_closed()
@@ -1490,16 +1302,12 @@ class TestAsyncMaisa:
 
         respx_mock.get("/foo").mock(return_value=httpx.Response(200, text="my-custom-format"))
 
-        strict_client = AsyncMaisa(
-            base_url=base_url, api_key=api_key, username=username, password=password, _strict_response_validation=True
-        )
+        strict_client = AsyncMaisa(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
         with pytest.raises(APIResponseValidationError):
             await strict_client.get("/foo", cast_to=Model)
 
-        client = AsyncMaisa(
-            base_url=base_url, api_key=api_key, username=username, password=password, _strict_response_validation=False
-        )
+        client = AsyncMaisa(base_url=base_url, api_key=api_key, _strict_response_validation=False)
 
         response = await client.get("/foo", cast_to=Model)
         assert isinstance(response, str)  # type: ignore[unreachable]
@@ -1527,9 +1335,7 @@ class TestAsyncMaisa:
     @mock.patch("time.time", mock.MagicMock(return_value=1696004797))
     @pytest.mark.asyncio
     async def test_parse_retry_after_header(self, remaining_retries: int, retry_after: str, timeout: float) -> None:
-        client = AsyncMaisa(
-            base_url=base_url, api_key=api_key, username=username, password=password, _strict_response_validation=True
-        )
+        client = AsyncMaisa(base_url=base_url, api_key=api_key, _strict_response_validation=True)
 
         headers = httpx.Headers({"retry-after": retry_after})
         options = FinalRequestOptions(method="get", url="/foo", max_retries=3)
@@ -1539,18 +1345,12 @@ class TestAsyncMaisa:
     @mock.patch("maisa._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/v1/models/rerank").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.post("/v1/models/embeddings").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
             await self.client.post(
-                "/v1/models/rerank",
-                body=cast(
-                    object,
-                    dict(
-                        sentences=["The light bulb was invented by Thomas Edison", "It's a nice day, isn't it"],
-                        source_sentence="Who invented the light bulb?",
-                    ),
-                ),
+                "/v1/models/embeddings",
+                body=cast(object, dict(texts=["string"])),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -1560,18 +1360,12 @@ class TestAsyncMaisa:
     @mock.patch("maisa._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/v1/models/rerank").mock(return_value=httpx.Response(500))
+        respx_mock.post("/v1/models/embeddings").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
             await self.client.post(
-                "/v1/models/rerank",
-                body=cast(
-                    object,
-                    dict(
-                        sentences=["The light bulb was invented by Thomas Edison", "It's a nice day, isn't it"],
-                        source_sentence="Who invented the light bulb?",
-                    ),
-                ),
+                "/v1/models/embeddings",
+                body=cast(object, dict(texts=["string"])),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )

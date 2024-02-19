@@ -2,10 +2,10 @@
 
 from typing import List
 
-from .._models import BaseModel
+from ..._models import BaseModel
 
-__all__ = ["ModelRerankResponse"]
+__all__ = ["Rerank"]
 
 
-class ModelRerankResponse(BaseModel):
+class Rerank(BaseModel):
     sorted_sentences: List[str]

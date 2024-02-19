@@ -4,9 +4,9 @@ from typing import List
 
 from ..._models import BaseModel
 
-__all__ = ["EmbeddingCreateResponse"]
+__all__ = ["Embeddings"]
 
 
-class EmbeddingCreateResponse(BaseModel):
+class Embeddings(BaseModel):
     embeddings: List[List[float]]
     """The embeddings generated from the texts."""

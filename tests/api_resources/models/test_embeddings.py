@@ -9,7 +9,7 @@ import pytest
 
 from maisa import Maisa, AsyncMaisa
 from tests.utils import assert_matches_type
-from maisa.types.models import EmbeddingCreateResponse
+from maisa.types.models import Embeddings
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -22,7 +22,7 @@ class TestEmbeddings:
         embedding = client.models.embeddings.create(
             texts=["string"],
         )
-        assert_matches_type(EmbeddingCreateResponse, embedding, path=["response"])
+        assert_matches_type(Embeddings, embedding, path=["response"])
 
     @parametrize
     def test_raw_response_create(self, client: Maisa) -> None:
@@ -33,7 +33,7 @@ class TestEmbeddings:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         embedding = response.parse()
-        assert_matches_type(EmbeddingCreateResponse, embedding, path=["response"])
+        assert_matches_type(Embeddings, embedding, path=["response"])
 
     @parametrize
     def test_streaming_response_create(self, client: Maisa) -> None:
@@ -44,7 +44,7 @@ class TestEmbeddings:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             embedding = response.parse()
-            assert_matches_type(EmbeddingCreateResponse, embedding, path=["response"])
+            assert_matches_type(Embeddings, embedding, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -57,7 +57,7 @@ class TestAsyncEmbeddings:
         embedding = await async_client.models.embeddings.create(
             texts=["string"],
         )
-        assert_matches_type(EmbeddingCreateResponse, embedding, path=["response"])
+        assert_matches_type(Embeddings, embedding, path=["response"])
 
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncMaisa) -> None:
@@ -68,7 +68,7 @@ class TestAsyncEmbeddings:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         embedding = await response.parse()
-        assert_matches_type(EmbeddingCreateResponse, embedding, path=["response"])
+        assert_matches_type(Embeddings, embedding, path=["response"])
 
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncMaisa) -> None:
@@ -79,6 +79,6 @@ class TestAsyncEmbeddings:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             embedding = await response.parse()
-            assert_matches_type(EmbeddingCreateResponse, embedding, path=["response"])
+            assert_matches_type(Embeddings, embedding, path=["response"])
 
         assert cast(Any, response.is_closed) is True
