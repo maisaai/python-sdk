@@ -1,6 +1,6 @@
 [project]
-name = "Maisa"
-version = "0.0.1-alpha.0"
+name = "maisa"
+version = "0.1.0-alpha.1"
 description = "The official Python library for the Maisa API"
 readme = "README.md"
 license = "Apache-2.0"
@@ -39,8 +39,8 @@ classifiers = [
 
 
 [project.urls]
-Homepage = "https://github.com/stainless-sdks/Maisa-python"
-Repository = "https://github.com/stainless-sdks/Maisa-python"
+Homepage = "https://github.com/clibrain/python-sdk"
+Repository = "https://github.com/clibrain/python-sdk"
 
 
 
