@@ -46,7 +46,6 @@ __all__ = [
 
 
 class Maisa(SyncAPIClient):
-    ai: resources.AI
     models: resources.Models
     with_raw_response: MaisaWithRawResponse
     with_streaming_response: MaisaWithStreamedResponse
@@ -126,7 +125,6 @@ class Maisa(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.ai = resources.AI(self)
         self.models = resources.Models(self)
         self.with_raw_response = MaisaWithRawResponse(self)
         self.with_streaming_response = MaisaWithStreamedResponse(self)
@@ -241,7 +239,6 @@ class Maisa(SyncAPIClient):
 
 
 class AsyncMaisa(AsyncAPIClient):
-    ai: resources.AsyncAI
     models: resources.AsyncModels
     with_raw_response: AsyncMaisaWithRawResponse
     with_streaming_response: AsyncMaisaWithStreamedResponse
@@ -321,7 +318,6 @@ class AsyncMaisa(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.ai = resources.AsyncAI(self)
         self.models = resources.AsyncModels(self)
         self.with_raw_response = AsyncMaisaWithRawResponse(self)
         self.with_streaming_response = AsyncMaisaWithStreamedResponse(self)
@@ -437,25 +433,21 @@ class AsyncMaisa(AsyncAPIClient):
 
 class MaisaWithRawResponse:
     def __init__(self, client: Maisa) -> None:
-        self.ai = resources.AIWithRawResponse(client.ai)
         self.models = resources.ModelsWithRawResponse(client.models)
 
 
 class AsyncMaisaWithRawResponse:
     def __init__(self, client: AsyncMaisa) -> None:
-        self.ai = resources.AsyncAIWithRawResponse(client.ai)
         self.models = resources.AsyncModelsWithRawResponse(client.models)
 
 
 class MaisaWithStreamedResponse:
     def __init__(self, client: Maisa) -> None:
-        self.ai = resources.AIWithStreamingResponse(client.ai)
         self.models = resources.ModelsWithStreamingResponse(client.models)
 
 
 class AsyncMaisaWithStreamedResponse:
     def __init__(self, client: AsyncMaisa) -> None:
-        self.ai = resources.AsyncAIWithStreamingResponse(client.ai)
         self.models = resources.AsyncModelsWithStreamingResponse(client.models)
 
 
