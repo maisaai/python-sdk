@@ -1,6 +1,6 @@
 # Maisa Python API library
 
-[![PyPI version](https://img.shields.io/pypi/v/Maisa.svg)](https://pypi.org/project/Maisa/)
+[![PyPI version](https://img.shields.io/pypi/v/maisa.svg)](https://pypi.org/project/maisa/)
 
 The Maisa Python library provides convenient access to the Maisa REST API from any Python 3.7+
 application. The library includes type definitions for all request params and response fields,
@@ -13,7 +13,7 @@ The REST API documentation can be found [on maisa.ai](https://maisa.ai/). The fu
 ## Installation
 
 ```sh
-pip install --pre Maisa
+pip install --pre maisa
 ```
 
 ## Usage
@@ -270,9 +270,9 @@ ai = response.parse()  # get the object that `ai.compare()` would have returned
 print(ai.extracted_data)
 ```
 
-These methods return an [`APIResponse`](https://github.com/stainless-sdks/tree/main/src/maisa/_response.py) object.
+These methods return an [`APIResponse`](https://github.com/clibrain/python-sdk/tree/main/src/maisa/_response.py) object.
 
-The async client returns an [`AsyncAPIResponse`](https://github.com/stainless-sdks/tree/main/src/maisa/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
+The async client returns an [`AsyncAPIResponse`](https://github.com/clibrain/python-sdk/tree/main/src/maisa/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
 
 #### `.with_streaming_response`
 
@@ -337,7 +337,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/stainless-sdks/Maisa-python/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/clibrain/python-sdk/issues) with questions, bugs, or suggestions.
 
 ## Requirements
 
