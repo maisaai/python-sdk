@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.0-alpha.2 (2024-02-20)
+
+Full Changelog: [v0.1.0-alpha.1...v0.1.0-alpha.2](https://github.com/clibrain/python-sdk/compare/v0.1.0-alpha.1...v0.1.0-alpha.2)
+
+### Features
+
+* update via SDK Studio ([#10](https://github.com/clibrain/python-sdk/issues/10)) ([fdaf14b](https://github.com/clibrain/python-sdk/commit/fdaf14b6a12e4f48258d1f69265674bc5f6c97ec))
+* update via SDK Studio ([#12](https://github.com/clibrain/python-sdk/issues/12)) ([f7180ca](https://github.com/clibrain/python-sdk/commit/f7180caac484ef097a9a3fdd3c839556ac22e7a2))
+
 ## 0.1.0-alpha.1 (2024-02-20)
 
 Full Changelog: [v0.0.1-alpha.0...v0.1.0-alpha.1](https://github.com/clibrain/python-sdk/compare/v0.0.1-alpha.0...v0.1.0-alpha.1)
