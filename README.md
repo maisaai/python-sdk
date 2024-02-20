@@ -212,9 +212,9 @@ embedding = response.parse()  # get the object that `models.embeddings.create()`
 print(embedding.embeddings)
 ```
 
-These methods return an [`APIResponse`](https://github.com/clibrain/python-sdk/tree/stainless/src/maisa/_response.py) object.
+These methods return an [`APIResponse`](https://github.com/clibrain/python-sdk/tree/main/src/maisa/_response.py) object.
 
-The async client returns an [`AsyncAPIResponse`](https://github.com/clibrain/python-sdk/tree/stainless/src/maisa/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
+The async client returns an [`AsyncAPIResponse`](https://github.com/clibrain/python-sdk/tree/main/src/maisa/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
 
 #### `.with_streaming_response`
 
