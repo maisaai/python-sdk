@@ -5,10 +5,10 @@ from __future__ import annotations
 from typing import List
 from typing_extensions import Required, TypedDict
 
-__all__ = ["ModelRerankParams"]
+__all__ = ["RerankCreateParams"]
 
 
-class ModelRerankParams(TypedDict, total=False):
+class RerankCreateParams(TypedDict, total=False):
     sentences: Required[List[str]]
     """A list of sentences to be reranked."""
 
