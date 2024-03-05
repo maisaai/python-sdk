@@ -48,6 +48,7 @@ __all__ = [
 class Maisa(SyncAPIClient):
     capabilities: resources.Capabilities
     models: resources.Models
+    kpu: resources.Kpu
     file_interpreter: resources.FileInterpreter
     mainet: resources.Mainet
     with_raw_response: MaisaWithRawResponse
@@ -107,6 +108,7 @@ class Maisa(SyncAPIClient):
 
         self.capabilities = resources.Capabilities(self)
         self.models = resources.Models(self)
+        self.kpu = resources.Kpu(self)
         self.file_interpreter = resources.FileInterpreter(self)
         self.mainet = resources.Mainet(self)
         self.with_raw_response = MaisaWithRawResponse(self)
@@ -220,6 +222,7 @@ class Maisa(SyncAPIClient):
 class AsyncMaisa(AsyncAPIClient):
     capabilities: resources.AsyncCapabilities
     models: resources.AsyncModels
+    kpu: resources.AsyncKpu
     file_interpreter: resources.AsyncFileInterpreter
     mainet: resources.AsyncMainet
     with_raw_response: AsyncMaisaWithRawResponse
@@ -279,6 +282,7 @@ class AsyncMaisa(AsyncAPIClient):
 
         self.capabilities = resources.AsyncCapabilities(self)
         self.models = resources.AsyncModels(self)
+        self.kpu = resources.AsyncKpu(self)
         self.file_interpreter = resources.AsyncFileInterpreter(self)
         self.mainet = resources.AsyncMainet(self)
         self.with_raw_response = AsyncMaisaWithRawResponse(self)
@@ -393,6 +397,7 @@ class MaisaWithRawResponse:
     def __init__(self, client: Maisa) -> None:
         self.capabilities = resources.CapabilitiesWithRawResponse(client.capabilities)
         self.models = resources.ModelsWithRawResponse(client.models)
+        self.kpu = resources.KpuWithRawResponse(client.kpu)
         self.file_interpreter = resources.FileInterpreterWithRawResponse(client.file_interpreter)
         self.mainet = resources.MainetWithRawResponse(client.mainet)
 
@@ -401,6 +406,7 @@ class AsyncMaisaWithRawResponse:
     def __init__(self, client: AsyncMaisa) -> None:
         self.capabilities = resources.AsyncCapabilitiesWithRawResponse(client.capabilities)
         self.models = resources.AsyncModelsWithRawResponse(client.models)
+        self.kpu = resources.AsyncKpuWithRawResponse(client.kpu)
         self.file_interpreter = resources.AsyncFileInterpreterWithRawResponse(client.file_interpreter)
         self.mainet = resources.AsyncMainetWithRawResponse(client.mainet)
 
@@ -409,6 +415,7 @@ class MaisaWithStreamedResponse:
     def __init__(self, client: Maisa) -> None:
         self.capabilities = resources.CapabilitiesWithStreamingResponse(client.capabilities)
         self.models = resources.ModelsWithStreamingResponse(client.models)
+        self.kpu = resources.KpuWithStreamingResponse(client.kpu)
         self.file_interpreter = resources.FileInterpreterWithStreamingResponse(client.file_interpreter)
         self.mainet = resources.MainetWithStreamingResponse(client.mainet)
 
@@ -417,6 +424,7 @@ class AsyncMaisaWithStreamedResponse:
     def __init__(self, client: AsyncMaisa) -> None:
         self.capabilities = resources.AsyncCapabilitiesWithStreamingResponse(client.capabilities)
         self.models = resources.AsyncModelsWithStreamingResponse(client.models)
+        self.kpu = resources.AsyncKpuWithStreamingResponse(client.kpu)
         self.file_interpreter = resources.AsyncFileInterpreterWithStreamingResponse(client.file_interpreter)
         self.mainet = resources.AsyncMainetWithStreamingResponse(client.mainet)
 

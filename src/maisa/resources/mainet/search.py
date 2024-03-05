@@ -5,7 +5,10 @@ from __future__ import annotations
 import httpx
 
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from ..._utils import maybe_transform
+from ..._utils import (
+    maybe_transform,
+    async_maybe_transform,
+)
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -102,7 +105,7 @@ class AsyncSearchResource(AsyncAPIResource):
         """
         return await self._post(
             "/v1/mainet/search",
-            body=maybe_transform({"text": text}, search_create_params.SearchCreateParams),
+            body=await async_maybe_transform({"text": text}, search_create_params.SearchCreateParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

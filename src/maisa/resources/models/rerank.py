@@ -7,7 +7,10 @@ from typing import List
 import httpx
 
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from ..._utils import maybe_transform
+from ..._utils import (
+    maybe_transform,
+    async_maybe_transform,
+)
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -116,7 +119,7 @@ class AsyncRerankResource(AsyncAPIResource):
         """
         return await self._post(
             "/v1/models/rerank",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {
                     "sentences": sentences,
                     "source_sentence": source_sentence,

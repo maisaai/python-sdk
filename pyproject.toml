@@ -39,8 +39,8 @@ classifiers = [
 
 
 [project.urls]
-Homepage = "https://github.com/clibrain/python-sdk"
-Repository = "https://github.com/clibrain/python-sdk"
+Homepage = "https://github.com/maisaai/python-sdk"
+Repository = "https://github.com/maisaai/python-sdk"
 
 
 

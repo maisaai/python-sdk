@@ -17,7 +17,10 @@ from .media import (
 )
 from ...types import capability_compare_params, capability_extract_params, capability_summarize_params
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from ..._utils import maybe_transform
+from ..._utils import (
+    maybe_transform,
+    async_maybe_transform,
+)
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -265,7 +268,7 @@ class AsyncCapabilities(AsyncAPIResource):
         """
         return await self._post(
             "/v1/capabilities/compare",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {
                     "text1": text1,
                     "text2": text2,
@@ -317,7 +320,7 @@ class AsyncCapabilities(AsyncAPIResource):
         """
         return await self._post(
             "/v1/capabilities/extract",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {
                     "text": text,
                     "variables": variables,
@@ -373,7 +376,7 @@ class AsyncCapabilities(AsyncAPIResource):
         """
         return await self._post(
             "/v1/capabilities/summarize",
-            body=maybe_transform(
+            body=await async_maybe_transform(
                 {
                     "text": text,
                     "format": format,
