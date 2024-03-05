@@ -8,7 +8,12 @@ from typing_extensions import Literal
 import httpx
 
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven, FileTypes
-from ..._utils import extract_files, maybe_transform, deepcopy_minimal
+from ..._utils import (
+    extract_files,
+    maybe_transform,
+    deepcopy_minimal,
+    async_maybe_transform,
+)
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -414,7 +419,7 @@ class AsyncMedia(AsyncAPIResource):
             extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
         return await self._post(
             "/v1/capabilities/compare/media",
-            body=maybe_transform(body, media_compare_params.MediaCompareParams),
+            body=await async_maybe_transform(body, media_compare_params.MediaCompareParams),
             files=files,
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -515,7 +520,7 @@ class AsyncMedia(AsyncAPIResource):
             extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
         return await self._post(
             "/v1/capabilities/extract/media",
-            body=maybe_transform(body, media_extract_params.MediaExtractParams),
+            body=await async_maybe_transform(body, media_extract_params.MediaExtractParams),
             files=files,
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -579,7 +584,7 @@ class AsyncMedia(AsyncAPIResource):
             extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
         return await self._post(
             "/v1/capabilities/summarize/media",
-            body=maybe_transform(body, media_summarize_params.MediaSummarizeParams),
+            body=await async_maybe_transform(body, media_summarize_params.MediaSummarizeParams),
             files=files,
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout

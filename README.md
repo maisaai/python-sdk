@@ -8,11 +8,12 @@ and offers both synchronous and asynchronous clients powered by [httpx](https://
 
 ## Documentation
 
-The REST API documentation can be found [on maisa.ai](https://maisa.ai/). The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found [on docs.maisa.ai](https://docs.maisa.ai/). The full API of this library can be found in [api.md](api.md).
 
 ## Installation
 
 ```sh
+# install from PyPI
 pip install --pre maisa
 ```
 
@@ -29,10 +30,10 @@ client = Maisa(
     api_key=os.environ.get("MAISA_API_KEY"),
 )
 
-embeddings = client.models.embeddings.create(
-    texts=["string"],
+text_summary = client.capabilities.summarize(
+    text="Example long text...",
 )
-print(embeddings.embeddings)
+print(text_summary.summary)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -56,10 +57,10 @@ client = AsyncMaisa(
 
 
 async def main() -> None:
-    embeddings = await client.models.embeddings.create(
-        texts=["string"],
+    text_summary = await client.capabilities.summarize(
+        text="Example long text...",
     )
-    print(embeddings.embeddings)
+    print(text_summary.summary)
 
 
 asyncio.run(main())
@@ -92,8 +93,8 @@ from maisa import Maisa
 client = Maisa()
 
 try:
-    client.models.embeddings.create(
-        texts=["string"],
+    client.capabilities.summarize(
+        text="Example long text...",
     )
 except maisa.APIConnectionError as e:
     print("The server could not be reached")
@@ -121,7 +122,7 @@ Error codes are as followed:
 
 ### Retries
 
-Certain errors are automatically retried 3 times by default, with a short exponential backoff.
+Certain errors are automatically retried 2 times by default, with a short exponential backoff.
 Connection errors (for example, due to a network connectivity problem), 408 Request Timeout, 409 Conflict,
 429 Rate Limit, and >=500 Internal errors are all retried by default.
 
@@ -137,8 +138,8 @@ client = Maisa(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).models.embeddings.create(
-    texts=["string"],
+client.with_options(max_retries=5).capabilities.summarize(
+    text="Example long text...",
 )
 ```
 
@@ -162,8 +163,8 @@ client = Maisa(
 )
 
 # Override per-request:
-client.with_options(timeout=5 * 1000).models.embeddings.create(
-    texts=["string"],
+client.with_options(timeout=5 * 1000).capabilities.summarize(
+    text="Example long text...",
 )
 ```
 
@@ -203,18 +204,18 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from maisa import Maisa
 
 client = Maisa()
-response = client.models.embeddings.with_raw_response.create(
-    texts=["string"],
+response = client.capabilities.with_raw_response.summarize(
+    text="Example long text...",
 )
 print(response.headers.get('X-My-Header'))
 
-embedding = response.parse()  # get the object that `models.embeddings.create()` would have returned
-print(embedding.embeddings)
+capability = response.parse()  # get the object that `capabilities.summarize()` would have returned
+print(capability.summary)
 ```
 
-These methods return an [`APIResponse`](https://github.com/clibrain/python-sdk/tree/main/src/maisa/_response.py) object.
+These methods return an [`APIResponse`](https://github.com/maisaai/python-sdk/tree/main/src/maisa/_response.py) object.
 
-The async client returns an [`AsyncAPIResponse`](https://github.com/clibrain/python-sdk/tree/main/src/maisa/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
+The async client returns an [`AsyncAPIResponse`](https://github.com/maisaai/python-sdk/tree/main/src/maisa/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
 
 #### `.with_streaming_response`
 
@@ -223,8 +224,8 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.models.embeddings.with_streaming_response.create(
-    texts=["string"],
+with client.capabilities.with_streaming_response.summarize(
+    text="Example long text...",
 ) as response:
     print(response.headers.get("X-My-Header"))
 
@@ -270,7 +271,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/clibrain/python-sdk/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/maisaai/python-sdk/issues) with questions, bugs, or suggestions.
 
 ## Requirements
 

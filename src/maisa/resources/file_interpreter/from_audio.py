@@ -7,7 +7,12 @@ from typing import Mapping, cast
 import httpx
 
 from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven, FileTypes
-from ..._utils import extract_files, maybe_transform, deepcopy_minimal
+from ..._utils import (
+    extract_files,
+    maybe_transform,
+    deepcopy_minimal,
+    async_maybe_transform,
+)
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -115,7 +120,7 @@ class AsyncFromAudio(AsyncAPIResource):
             extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
         return await self._post(
             "/v1/file-interpreter/from-audio",
-            body=maybe_transform(body, from_audio_create_params.FromAudioCreateParams),
+            body=await async_maybe_transform(body, from_audio_create_params.FromAudioCreateParams),
             files=files,
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout

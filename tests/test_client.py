@@ -82,7 +82,7 @@ class TestMaisa:
         # options that have a default are overridden correctly
         copied = self.client.copy(max_retries=7)
         assert copied.max_retries == 7
-        assert self.client.max_retries == 3
+        assert self.client.max_retries == 2
 
         copied2 = copied.copy(max_retries=6)
         assert copied2.max_retries == 6
@@ -290,6 +290,16 @@ class TestMaisa:
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
             timeout = httpx.Timeout(**request.extensions["timeout"])  # type: ignore
             assert timeout == DEFAULT_TIMEOUT  # our default
+
+    async def test_invalid_http_client(self) -> None:
+        with pytest.raises(TypeError, match="Invalid `http_client` arg"):
+            async with httpx.AsyncClient() as http_client:
+                Maisa(
+                    base_url=base_url,
+                    api_key=api_key,
+                    _strict_response_validation=True,
+                    http_client=cast(Any, http_client),
+                )
 
     def test_default_headers_option(self) -> None:
         client = Maisa(
@@ -675,12 +685,12 @@ class TestMaisa:
     @mock.patch("maisa._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/v1/models/embeddings").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.post("/v1/capabilities/summarize").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
             self.client.post(
-                "/v1/models/embeddings",
-                body=cast(object, dict(texts=["string"])),
+                "/v1/capabilities/summarize",
+                body=cast(object, dict(text="Example long text...")),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -690,12 +700,12 @@ class TestMaisa:
     @mock.patch("maisa._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/v1/models/embeddings").mock(return_value=httpx.Response(500))
+        respx_mock.post("/v1/capabilities/summarize").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
             self.client.post(
-                "/v1/models/embeddings",
-                body=cast(object, dict(texts=["string"])),
+                "/v1/capabilities/summarize",
+                body=cast(object, dict(text="Example long text...")),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -740,7 +750,7 @@ class TestAsyncMaisa:
         # options that have a default are overridden correctly
         copied = self.client.copy(max_retries=7)
         assert copied.max_retries == 7
-        assert self.client.max_retries == 3
+        assert self.client.max_retries == 2
 
         copied2 = copied.copy(max_retries=6)
         assert copied2.max_retries == 6
@@ -950,6 +960,16 @@ class TestAsyncMaisa:
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
             timeout = httpx.Timeout(**request.extensions["timeout"])  # type: ignore
             assert timeout == DEFAULT_TIMEOUT  # our default
+
+    def test_invalid_http_client(self) -> None:
+        with pytest.raises(TypeError, match="Invalid `http_client` arg"):
+            with httpx.Client() as http_client:
+                AsyncMaisa(
+                    base_url=base_url,
+                    api_key=api_key,
+                    _strict_response_validation=True,
+                    http_client=cast(Any, http_client),
+                )
 
     def test_default_headers_option(self) -> None:
         client = AsyncMaisa(
@@ -1345,12 +1365,12 @@ class TestAsyncMaisa:
     @mock.patch("maisa._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/v1/models/embeddings").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.post("/v1/capabilities/summarize").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
             await self.client.post(
-                "/v1/models/embeddings",
-                body=cast(object, dict(texts=["string"])),
+                "/v1/capabilities/summarize",
+                body=cast(object, dict(text="Example long text...")),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -1360,12 +1380,12 @@ class TestAsyncMaisa:
     @mock.patch("maisa._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/v1/models/embeddings").mock(return_value=httpx.Response(500))
+        respx_mock.post("/v1/capabilities/summarize").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
             await self.client.post(
-                "/v1/models/embeddings",
-                body=cast(object, dict(texts=["string"])),
+                "/v1/capabilities/summarize",
+                body=cast(object, dict(text="Example long text...")),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )

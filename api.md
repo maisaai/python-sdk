@@ -46,6 +46,18 @@ Methods:
 
 - <code title="post /v1/models/rerank">client.models.rerank.<a href="./src/maisa/resources/models/rerank.py">create</a>(\*\*<a href="src/maisa/types/models/rerank_create_params.py">params</a>) -> <a href="./src/maisa/types/models/rerank.py">Rerank</a></code>
 
+# Kpu
+
+Types:
+
+```python
+from maisa.types import KpuRunResponse
+```
+
+Methods:
+
+- <code title="post /v1/kpu/run">client.kpu.<a href="./src/maisa/resources/kpu.py">run</a>(\*\*<a href="src/maisa/types/kpu_run_params.py">params</a>) -> <a href="./src/maisa/types/kpu_run_response.py">KpuRunResponse</a></code>
+
 # FileInterpreter
 
 ## FromPdf
