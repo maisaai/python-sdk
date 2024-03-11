@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-alpha.4 (2024-03-05)
+
+Full Changelog: [v0.1.0-alpha.3...v0.1.0-alpha.4](https://github.com/maisaai/python-sdk/compare/v0.1.0-alpha.3...v0.1.0-alpha.4)
+
+### Features
+
+* update via SDK Studio ([#16](https://github.com/maisaai/python-sdk/issues/16)) ([c67fc05](https://github.com/maisaai/python-sdk/commit/c67fc05ae116d31bb6113c12b26c4192d1d669ee))
+
 ## 0.1.0-alpha.3 (2024-02-20)
 
 Full Changelog: [v0.1.0-alpha.2...v0.1.0-alpha.3](https://github.com/clibrain/python-sdk/compare/v0.1.0-alpha.2...v0.1.0-alpha.3)
