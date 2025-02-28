@@ -247,7 +247,7 @@ class AsyncMaisa(AsyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new async Maisa client instance.
+        """Construct a new async AsyncMaisa client instance.
 
         This automatically infers the `api_key` argument from the `MAISA_API_KEY` environment variable if it is not provided.
         """
