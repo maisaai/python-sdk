@@ -1,2 +1,4 @@
 configured_endpoints: 13
 openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/maisa%2FMaisa-c82e0a80b379d33d11af783865ec15844bcd750043bf0f1543ebdf72bda79f3a.yml
+openapi_spec_hash: 67e2baafe7455c2a734ac0b0ea699719
+config_hash: d6a8d922bf8b98716e3f55b9c829cd45
