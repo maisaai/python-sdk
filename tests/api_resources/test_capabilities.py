@@ -161,7 +161,7 @@ class TestCapabilities:
             text="Example long text...",
             format="paragraph",
             lang="en",
-            length="short",
+            length="medium",
             summary_hint="Example summary of the text...",
         )
         assert_matches_type(TextSummary, capability, path=["response"])
@@ -338,7 +338,7 @@ class TestAsyncCapabilities:
             text="Example long text...",
             format="paragraph",
             lang="en",
-            length="short",
+            length="medium",
             summary_hint="Example summary of the text...",
         )
         assert_matches_type(TextSummary, capability, path=["response"])
