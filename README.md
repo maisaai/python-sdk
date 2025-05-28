@@ -24,9 +24,12 @@ pip install --pre maisa
 The full API of this library can be found in [api.md](api.md).
 
 ```python
+import os
 from maisa import Maisa
 
-client = Maisa()
+client = Maisa(
+    api_key=os.environ.get("MAISA_API_KEY"),  # This is the default and can be omitted
+)
 
 text_summary = client.capabilities.summarize(
     text="Example long text...",
@@ -44,10 +47,13 @@ so that your API Key is not stored in source control.
 Simply import `AsyncMaisa` instead of `Maisa` and use `await` with each API call:
 
 ```python
+import os
 import asyncio
 from maisa import AsyncMaisa
 
-client = AsyncMaisa()
+client = AsyncMaisa(
+    api_key=os.environ.get("MAISA_API_KEY"),  # This is the default and can be omitted
+)
 
 
 async def main() -> None:
