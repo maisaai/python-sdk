@@ -1,6 +1,7 @@
 # Maisa Python API library
 
-[![PyPI version](<https://img.shields.io/pypi/v/maisa.svg?label=pypi%20(stable)>)](https://pypi.org/project/maisa/)
+<!-- prettier-ignore -->
+[![PyPI version](https://img.shields.io/pypi/v/maisa.svg?label=pypi%20(stable))](https://pypi.org/project/maisa/)
 
 The Maisa Python library provides convenient access to the Maisa REST API from any Python 3.8+
 application. The library includes type definitions for all request params and response fields,
