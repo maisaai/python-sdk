@@ -83,7 +83,6 @@ pip install --pre maisa[aiohttp]
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
 
 ```python
-import os
 import asyncio
 from maisa import DefaultAioHttpClient
 from maisa import AsyncMaisa
@@ -91,7 +90,7 @@ from maisa import AsyncMaisa
 
 async def main() -> None:
     async with AsyncMaisa(
-        api_key=os.environ.get("MAISA_API_KEY"),  # This is the default and can be omitted
+        api_key="My API Key",
         http_client=DefaultAioHttpClient(),
     ) as client:
         text_summary = await client.capabilities.summarize(
