@@ -2,10 +2,10 @@
 
 from __future__ import annotations
 
-from typing import List, Optional
+from typing import Optional
 from typing_extensions import Literal, Required, TypedDict
 
-from .._types import FileTypes
+from .._types import FileTypes, SequenceNotStr
 
 __all__ = ["KpuRunParams"]
 
@@ -28,7 +28,7 @@ class KpuRunParams(TypedDict, total=False):
     intent. This feature is experimental.
     """
 
-    file: List[FileTypes]
+    file: SequenceNotStr[FileTypes]
     """Files to be used in the KPU execution. Files can be of any type."""
 
     reasoner_model: Optional[
