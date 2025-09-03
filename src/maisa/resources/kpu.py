@@ -2,13 +2,13 @@
 
 from __future__ import annotations
 
-from typing import List, Mapping, Optional, cast
+from typing import Mapping, Optional, cast
 from typing_extensions import Literal
 
 import httpx
 
 from ..types import kpu_run_params
-from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven, FileTypes
+from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven, FileTypes, SequenceNotStr
 from .._utils import extract_files, maybe_transform, deepcopy_minimal, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -49,7 +49,7 @@ class KpuResource(SyncAPIResource):
         query: str,
         explain_steps: bool | NotGiven = NOT_GIVEN,
         retries: int | NotGiven = NOT_GIVEN,
-        file: List[FileTypes] | NotGiven = NOT_GIVEN,
+        file: SequenceNotStr[FileTypes] | NotGiven = NOT_GIVEN,
         reasoner_model: Optional[
             Literal[
                 "gpt-4-turbo",
@@ -156,7 +156,7 @@ class AsyncKpuResource(AsyncAPIResource):
         query: str,
         explain_steps: bool | NotGiven = NOT_GIVEN,
         retries: int | NotGiven = NOT_GIVEN,
-        file: List[FileTypes] | NotGiven = NOT_GIVEN,
+        file: SequenceNotStr[FileTypes] | NotGiven = NOT_GIVEN,
         reasoner_model: Optional[
             Literal[
                 "gpt-4-turbo",
