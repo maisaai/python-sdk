@@ -16,7 +16,7 @@ from .media import (
     AsyncMediaResourceWithStreamingResponse,
 )
 from ...types import capability_compare_params, capability_extract_params, capability_summarize_params
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -64,14 +64,14 @@ class CapabilitiesResource(SyncAPIResource):
         text1: str,
         text2: str,
         variables: Dict[str, capability_compare_params.Variables],
-        lang: Literal["en", "es", "pt", "fr", "de", "it", "nl", "sv", "pl", "ro"] | NotGiven = NOT_GIVEN,
-        prompt: str | NotGiven = NOT_GIVEN,
+        lang: Literal["en", "es", "pt", "fr", "de", "it", "nl", "sv", "pl", "ro"] | Omit = omit,
+        prompt: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TextComparator:
         """
         Compare extracts of text based on a specific data.
@@ -119,13 +119,13 @@ class CapabilitiesResource(SyncAPIResource):
         *,
         text: str,
         variables: Dict[str, capability_extract_params.Variables],
-        lang: Literal["en", "es", "pt", "fr", "de", "it", "nl", "sv", "pl", "ro"] | NotGiven = NOT_GIVEN,
+        lang: Literal["en", "es", "pt", "fr", "de", "it", "nl", "sv", "pl", "ro"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TextExtractor:
         """Extracts structured data from text.
 
@@ -168,16 +168,16 @@ class CapabilitiesResource(SyncAPIResource):
         self,
         *,
         text: str,
-        format: Literal["paragraph", "bullet"] | NotGiven = NOT_GIVEN,
-        lang: Literal["en", "es", "pt", "fr", "de", "it", "nl", "sv", "pl", "ro"] | NotGiven = NOT_GIVEN,
-        length: Literal["short", "medium", "long"] | NotGiven = NOT_GIVEN,
-        summary_hint: str | NotGiven = NOT_GIVEN,
+        format: Literal["paragraph", "bullet"] | Omit = omit,
+        lang: Literal["en", "es", "pt", "fr", "de", "it", "nl", "sv", "pl", "ro"] | Omit = omit,
+        length: Literal["short", "medium", "long"] | Omit = omit,
+        summary_hint: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TextSummary:
         """Summarizes a text.
 
@@ -253,14 +253,14 @@ class AsyncCapabilitiesResource(AsyncAPIResource):
         text1: str,
         text2: str,
         variables: Dict[str, capability_compare_params.Variables],
-        lang: Literal["en", "es", "pt", "fr", "de", "it", "nl", "sv", "pl", "ro"] | NotGiven = NOT_GIVEN,
-        prompt: str | NotGiven = NOT_GIVEN,
+        lang: Literal["en", "es", "pt", "fr", "de", "it", "nl", "sv", "pl", "ro"] | Omit = omit,
+        prompt: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TextComparator:
         """
         Compare extracts of text based on a specific data.
@@ -308,13 +308,13 @@ class AsyncCapabilitiesResource(AsyncAPIResource):
         *,
         text: str,
         variables: Dict[str, capability_extract_params.Variables],
-        lang: Literal["en", "es", "pt", "fr", "de", "it", "nl", "sv", "pl", "ro"] | NotGiven = NOT_GIVEN,
+        lang: Literal["en", "es", "pt", "fr", "de", "it", "nl", "sv", "pl", "ro"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TextExtractor:
         """Extracts structured data from text.
 
@@ -357,16 +357,16 @@ class AsyncCapabilitiesResource(AsyncAPIResource):
         self,
         *,
         text: str,
-        format: Literal["paragraph", "bullet"] | NotGiven = NOT_GIVEN,
-        lang: Literal["en", "es", "pt", "fr", "de", "it", "nl", "sv", "pl", "ro"] | NotGiven = NOT_GIVEN,
-        length: Literal["short", "medium", "long"] | NotGiven = NOT_GIVEN,
-        summary_hint: str | NotGiven = NOT_GIVEN,
+        format: Literal["paragraph", "bullet"] | Omit = omit,
+        lang: Literal["en", "es", "pt", "fr", "de", "it", "nl", "sv", "pl", "ro"] | Omit = omit,
+        length: Literal["short", "medium", "long"] | Omit = omit,
+        summary_hint: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TextSummary:
         """Summarizes a text.
 

@@ -7,7 +7,7 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven, FileTypes
+from ..._types import Body, Omit, Query, Headers, NotGiven, FileTypes, omit, not_given
 from ..._utils import extract_files, maybe_transform, deepcopy_minimal, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -51,26 +51,26 @@ class MediaResource(SyncAPIResource):
         *,
         file1: FileTypes,
         file2: FileTypes,
-        lang: Literal["en", "es", "pt", "fr", "de", "it", "nl", "sv", "pl", "ro"] | NotGiven = NOT_GIVEN,
-        prompt: str | NotGiven = NOT_GIVEN,
-        variable1_description: str | NotGiven = NOT_GIVEN,
-        variable1_name: str | NotGiven = NOT_GIVEN,
-        variable1_type: Literal["string", "number", "date", "boolean"] | NotGiven = NOT_GIVEN,
-        variable2_description: str | NotGiven = NOT_GIVEN,
-        variable2_name: str | NotGiven = NOT_GIVEN,
-        variable2_type: Literal["string", "number", "date", "boolean"] | NotGiven = NOT_GIVEN,
-        variable3_description: str | NotGiven = NOT_GIVEN,
-        variable3_name: str | NotGiven = NOT_GIVEN,
-        variable3_type: Literal["string", "number", "date", "boolean"] | NotGiven = NOT_GIVEN,
-        variable4_description: str | NotGiven = NOT_GIVEN,
-        variable4_name: str | NotGiven = NOT_GIVEN,
-        variable4_type: Literal["string", "number", "date", "boolean"] | NotGiven = NOT_GIVEN,
+        lang: Literal["en", "es", "pt", "fr", "de", "it", "nl", "sv", "pl", "ro"] | Omit = omit,
+        prompt: str | Omit = omit,
+        variable1_description: str | Omit = omit,
+        variable1_name: str | Omit = omit,
+        variable1_type: Literal["string", "number", "date", "boolean"] | Omit = omit,
+        variable2_description: str | Omit = omit,
+        variable2_name: str | Omit = omit,
+        variable2_type: Literal["string", "number", "date", "boolean"] | Omit = omit,
+        variable3_description: str | Omit = omit,
+        variable3_name: str | Omit = omit,
+        variable3_type: Literal["string", "number", "date", "boolean"] | Omit = omit,
+        variable4_description: str | Omit = omit,
+        variable4_name: str | Omit = omit,
+        variable4_type: Literal["string", "number", "date", "boolean"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TextComparator:
         """Compare extracts of media files based on a specific data.
 
@@ -155,25 +155,25 @@ class MediaResource(SyncAPIResource):
         self,
         *,
         file: FileTypes,
-        lang: Literal["en", "es", "pt", "fr", "de", "it", "nl", "sv", "pl", "ro"] | NotGiven = NOT_GIVEN,
-        variable1_description: str | NotGiven = NOT_GIVEN,
-        variable1_name: str | NotGiven = NOT_GIVEN,
-        variable1_type: Literal["string", "number", "date", "boolean"] | NotGiven = NOT_GIVEN,
-        variable2_description: str | NotGiven = NOT_GIVEN,
-        variable2_name: str | NotGiven = NOT_GIVEN,
-        variable2_type: Literal["string", "number", "date", "boolean"] | NotGiven = NOT_GIVEN,
-        variable3_description: str | NotGiven = NOT_GIVEN,
-        variable3_name: str | NotGiven = NOT_GIVEN,
-        variable3_type: Literal["string", "number", "date", "boolean"] | NotGiven = NOT_GIVEN,
-        variable4_description: str | NotGiven = NOT_GIVEN,
-        variable4_name: str | NotGiven = NOT_GIVEN,
-        variable4_type: Literal["string", "number", "date", "boolean"] | NotGiven = NOT_GIVEN,
+        lang: Literal["en", "es", "pt", "fr", "de", "it", "nl", "sv", "pl", "ro"] | Omit = omit,
+        variable1_description: str | Omit = omit,
+        variable1_name: str | Omit = omit,
+        variable1_type: Literal["string", "number", "date", "boolean"] | Omit = omit,
+        variable2_description: str | Omit = omit,
+        variable2_name: str | Omit = omit,
+        variable2_type: Literal["string", "number", "date", "boolean"] | Omit = omit,
+        variable3_description: str | Omit = omit,
+        variable3_name: str | Omit = omit,
+        variable3_type: Literal["string", "number", "date", "boolean"] | Omit = omit,
+        variable4_description: str | Omit = omit,
+        variable4_name: str | Omit = omit,
+        variable4_type: Literal["string", "number", "date", "boolean"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TextExtractor:
         """Extracts structured data from a file.
 
@@ -254,16 +254,16 @@ class MediaResource(SyncAPIResource):
         self,
         *,
         file: FileTypes,
-        format: Literal["paragraph", "bullet"] | NotGiven = NOT_GIVEN,
-        lang: Literal["en", "es", "pt", "fr", "de", "it", "nl", "sv", "pl", "ro"] | NotGiven = NOT_GIVEN,
-        length: Literal["short", "medium", "long"] | NotGiven = NOT_GIVEN,
-        summary_hint: str | NotGiven = NOT_GIVEN,
+        format: Literal["paragraph", "bullet"] | Omit = omit,
+        lang: Literal["en", "es", "pt", "fr", "de", "it", "nl", "sv", "pl", "ro"] | Omit = omit,
+        length: Literal["short", "medium", "long"] | Omit = omit,
+        summary_hint: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TextSummary:
         """Summarizes a media file.
 
@@ -339,26 +339,26 @@ class AsyncMediaResource(AsyncAPIResource):
         *,
         file1: FileTypes,
         file2: FileTypes,
-        lang: Literal["en", "es", "pt", "fr", "de", "it", "nl", "sv", "pl", "ro"] | NotGiven = NOT_GIVEN,
-        prompt: str | NotGiven = NOT_GIVEN,
-        variable1_description: str | NotGiven = NOT_GIVEN,
-        variable1_name: str | NotGiven = NOT_GIVEN,
-        variable1_type: Literal["string", "number", "date", "boolean"] | NotGiven = NOT_GIVEN,
-        variable2_description: str | NotGiven = NOT_GIVEN,
-        variable2_name: str | NotGiven = NOT_GIVEN,
-        variable2_type: Literal["string", "number", "date", "boolean"] | NotGiven = NOT_GIVEN,
-        variable3_description: str | NotGiven = NOT_GIVEN,
-        variable3_name: str | NotGiven = NOT_GIVEN,
-        variable3_type: Literal["string", "number", "date", "boolean"] | NotGiven = NOT_GIVEN,
-        variable4_description: str | NotGiven = NOT_GIVEN,
-        variable4_name: str | NotGiven = NOT_GIVEN,
-        variable4_type: Literal["string", "number", "date", "boolean"] | NotGiven = NOT_GIVEN,
+        lang: Literal["en", "es", "pt", "fr", "de", "it", "nl", "sv", "pl", "ro"] | Omit = omit,
+        prompt: str | Omit = omit,
+        variable1_description: str | Omit = omit,
+        variable1_name: str | Omit = omit,
+        variable1_type: Literal["string", "number", "date", "boolean"] | Omit = omit,
+        variable2_description: str | Omit = omit,
+        variable2_name: str | Omit = omit,
+        variable2_type: Literal["string", "number", "date", "boolean"] | Omit = omit,
+        variable3_description: str | Omit = omit,
+        variable3_name: str | Omit = omit,
+        variable3_type: Literal["string", "number", "date", "boolean"] | Omit = omit,
+        variable4_description: str | Omit = omit,
+        variable4_name: str | Omit = omit,
+        variable4_type: Literal["string", "number", "date", "boolean"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TextComparator:
         """Compare extracts of media files based on a specific data.
 
@@ -443,25 +443,25 @@ class AsyncMediaResource(AsyncAPIResource):
         self,
         *,
         file: FileTypes,
-        lang: Literal["en", "es", "pt", "fr", "de", "it", "nl", "sv", "pl", "ro"] | NotGiven = NOT_GIVEN,
-        variable1_description: str | NotGiven = NOT_GIVEN,
-        variable1_name: str | NotGiven = NOT_GIVEN,
-        variable1_type: Literal["string", "number", "date", "boolean"] | NotGiven = NOT_GIVEN,
-        variable2_description: str | NotGiven = NOT_GIVEN,
-        variable2_name: str | NotGiven = NOT_GIVEN,
-        variable2_type: Literal["string", "number", "date", "boolean"] | NotGiven = NOT_GIVEN,
-        variable3_description: str | NotGiven = NOT_GIVEN,
-        variable3_name: str | NotGiven = NOT_GIVEN,
-        variable3_type: Literal["string", "number", "date", "boolean"] | NotGiven = NOT_GIVEN,
-        variable4_description: str | NotGiven = NOT_GIVEN,
-        variable4_name: str | NotGiven = NOT_GIVEN,
-        variable4_type: Literal["string", "number", "date", "boolean"] | NotGiven = NOT_GIVEN,
+        lang: Literal["en", "es", "pt", "fr", "de", "it", "nl", "sv", "pl", "ro"] | Omit = omit,
+        variable1_description: str | Omit = omit,
+        variable1_name: str | Omit = omit,
+        variable1_type: Literal["string", "number", "date", "boolean"] | Omit = omit,
+        variable2_description: str | Omit = omit,
+        variable2_name: str | Omit = omit,
+        variable2_type: Literal["string", "number", "date", "boolean"] | Omit = omit,
+        variable3_description: str | Omit = omit,
+        variable3_name: str | Omit = omit,
+        variable3_type: Literal["string", "number", "date", "boolean"] | Omit = omit,
+        variable4_description: str | Omit = omit,
+        variable4_name: str | Omit = omit,
+        variable4_type: Literal["string", "number", "date", "boolean"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TextExtractor:
         """Extracts structured data from a file.
 
@@ -542,16 +542,16 @@ class AsyncMediaResource(AsyncAPIResource):
         self,
         *,
         file: FileTypes,
-        format: Literal["paragraph", "bullet"] | NotGiven = NOT_GIVEN,
-        lang: Literal["en", "es", "pt", "fr", "de", "it", "nl", "sv", "pl", "ro"] | NotGiven = NOT_GIVEN,
-        length: Literal["short", "medium", "long"] | NotGiven = NOT_GIVEN,
-        summary_hint: str | NotGiven = NOT_GIVEN,
+        format: Literal["paragraph", "bullet"] | Omit = omit,
+        lang: Literal["en", "es", "pt", "fr", "de", "it", "nl", "sv", "pl", "ro"] | Omit = omit,
+        length: Literal["short", "medium", "long"] | Omit = omit,
+        summary_hint: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> TextSummary:
         """Summarizes a media file.
 
