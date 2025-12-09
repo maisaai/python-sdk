@@ -6,5 +6,7 @@ __all__ = ["TextExtractor"]
 
 
 class TextExtractor(BaseModel):
+    """Text Extraction Response."""
+
     extracted_data: object
     """The extracted data from the text."""

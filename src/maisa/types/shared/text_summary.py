@@ -6,5 +6,7 @@ __all__ = ["TextSummary"]
 
 
 class TextSummary(BaseModel):
+    """Text Summary Request."""
+
     summary: str
     """The summarized version of the provided text."""

@@ -6,5 +6,7 @@ __all__ = ["TextComparator"]
 
 
 class TextComparator(BaseModel):
+    """Texts Comparator Response."""
+
     extracted_data: object
     """The extracted data from the text."""
