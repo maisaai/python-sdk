@@ -24,6 +24,8 @@ class CapabilityExtractParams(TypedDict, total=False):
 
 
 class Variables(TypedDict, total=False):
+    """Text Extraction Request Variable."""
+
     description: Required[str]
     """The description of the variable."""
 
