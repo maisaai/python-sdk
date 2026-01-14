@@ -17,7 +17,7 @@ The REST API documentation can be found on [docs.maisa.ai](https://docs.maisa.ai
 
 ```sh
 # install from PyPI
-pip install --pre maisa
+pip install '--pre maisa'
 ```
 
 ## Usage
@@ -77,7 +77,7 @@ You can enable this by installing `aiohttp`:
 
 ```sh
 # install from PyPI
-pip install --pre maisa[aiohttp]
+pip install '--pre maisa[aiohttp]'
 ```
 
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
