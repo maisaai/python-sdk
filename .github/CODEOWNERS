@@ -1,0 +1,16 @@
+* @maisaai/developers
+.dockerignore @maisaai/sre
+.github/workflows/ @maisaai/sre
+.github/CODEOWNERS @maisaai/sre
+.gitignore @maisaai/sre
+.mega-linter.yml @maisaai/sre
+.maisa/ @maisaai/sre
+CHANGELOG.md @maisaai/sre
+Dockerfile @maisaai/sre
+LICENSE.md @maisaai/sre
+SECURITY.md @maisaai/sre
+VERSION @maisaai/sre
+dependabot.yaml @maisaai/sre
+sonar-project.properties @maisaai/sre
+.golang-ci.yaml @maisaai/sre
+.releaserc @maisaai/sre

@@ -1,0 +1,29 @@
+name: Release Supply Chain Security
+run-name: Release supply chain for ${{ github.ref_name }}
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  actions: read
+  contents: read
+  id-token: write
+  security-events: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  supply-chain:
+    uses: maisaai/maisa-ci-cd/.github/workflows/supply-chain-release.yml@feature/supply-chain-sbom-attestation
+    with:
+      ci_cd_ref: feature/supply-chain-sbom-attestation
+      fail_on_findings: true
+      enable_issue_sync: false
+    secrets:
+      SHARED_ACCOUNT_AWS_ROLE_ARN: ${{ secrets.SHARED_ACCOUNT_AWS_ROLE_ARN }}
+      APP_ID: ${{ secrets.APP_ID }}
+      APP_PRIVATE_KEY: ${{ secrets.APP_PRIVATE_KEY }}
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

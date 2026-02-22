@@ -1,0 +1,18 @@
+# MegaLinter v9 Configuration
+# Profile: service-python-template
+# Applied via supply-chain-pr.yml SAST lane
+APPLY_FIXES: none
+ENABLE_LINTERS:
+  - REPOSITORY_SEMGREP
+  - REPOSITORY_DEVSKIM
+  - REPOSITORY_GITLEAKS
+  - PYTHON_BANDIT
+  - PYTHON_RUFF
+  - DOCKERFILE_HADOLINT
+DISABLE_LINTERS: []
+SHOW_ELAPSED_TIME: true
+FILEIO_REPORTER: false
+SARIF_REPORTER: true
+GITHUB_STATUS_REPORTER: true
+FLAVOR_SUGGESTIONS: false
+FILTER_REGEX_EXCLUDE: '(__pycache__/|\.eggs/|\.tox/|venv/|\.venv/)'

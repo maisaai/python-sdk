@@ -1,5 +1,21 @@
 # Maisa Python API library
 
+[![Supply Chain PR](https://github.com/maisaai/python-sdk/actions/workflows/pr-supply-chain-security.yaml/badge.svg)](https://github.com/maisaai/python-sdk/actions/workflows/pr-supply-chain-security.yaml)
+[![Supply Chain Release](https://github.com/maisaai/python-sdk/actions/workflows/release-supply-chain-security.yaml/badge.svg)](https://github.com/maisaai/python-sdk/actions/workflows/release-supply-chain-security.yaml)
+
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=maisaai_python-sdk&metric=security_rating)](https://sonarcloud.io/summary/overall?id=maisaai_python-sdk)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=maisaai_python-sdk&metric=reliability_rating)](https://sonarcloud.io/summary/overall?id=maisaai_python-sdk)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=maisaai_python-sdk&metric=sqale_rating)](https://sonarcloud.io/summary/overall?id=maisaai_python-sdk)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=maisaai_python-sdk&metric=coverage)](https://sonarcloud.io/summary/overall?id=maisaai_python-sdk)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=maisaai_python-sdk&metric=duplicated_lines_density)](https://sonarcloud.io/summary/overall?id=maisaai_python-sdk)
+[![Security Hotspots](https://sonarcloud.io/api/project_badges/measure?project=maisaai_python-sdk&metric=security_hotspots)](https://sonarcloud.io/summary/overall?id=maisaai_python-sdk)
+
+[![GitHub issues](https://img.shields.io/github/issues/maisaai/python-sdk)](https://github.com/maisaai/python-sdk/issues)
+[![Dependabot Status](https://img.shields.io/badge/dependabot-enabled-025E8C?logo=dependabot)](https://github.com/maisaai/python-sdk/network/updates)
+
+---
+
+
 [![PyPI version](https://img.shields.io/pypi/v/maisa.svg)](https://pypi.org/project/maisa/)
 
 The Maisa Python library provides convenient access to the Maisa REST API from any Python 3.7+
