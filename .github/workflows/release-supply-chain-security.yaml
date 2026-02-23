@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
   push:
     tags:
-      - 'v*.*.*'
+      - "v*.*.*"
 
 permissions:
   actions: read
@@ -17,9 +17,9 @@ permissions:
 
 jobs:
   supply-chain:
-    uses: maisaai/maisa-ci-cd/.github/workflows/supply-chain-release.yml@feature/supply-chain-sbom-attestation
+    uses: maisaai/maisa-ci-cd/.github/workflows/supply-chain-release.yml@main
     with:
-      ci_cd_ref: feature/supply-chain-sbom-attestation
+      ci_cd_ref: main
       fail_on_findings: true
       enable_issue_sync: false
     secrets:
