@@ -124,7 +124,7 @@ client = Maisa()
 
 client.capabilities.media.compare(
     file1=Path("/path/to/file"),
-    file2=b"raw file contents",
+    file2=b"Example data",
 )
 ```
 
