@@ -20,14 +20,14 @@ class TestEmbeddings:
     @parametrize
     def test_method_create(self, client: Maisa) -> None:
         embedding = client.models.embeddings.create(
-            texts=["string"],
+            texts=["Who invented the light bulb?", "Hey, how are you?"],
         )
         assert_matches_type(Embeddings, embedding, path=["response"])
 
     @parametrize
     def test_raw_response_create(self, client: Maisa) -> None:
         response = client.models.embeddings.with_raw_response.create(
-            texts=["string"],
+            texts=["Who invented the light bulb?", "Hey, how are you?"],
         )
 
         assert response.is_closed is True
@@ -38,7 +38,7 @@ class TestEmbeddings:
     @parametrize
     def test_streaming_response_create(self, client: Maisa) -> None:
         with client.models.embeddings.with_streaming_response.create(
-            texts=["string"],
+            texts=["Who invented the light bulb?", "Hey, how are you?"],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -57,14 +57,14 @@ class TestAsyncEmbeddings:
     @parametrize
     async def test_method_create(self, async_client: AsyncMaisa) -> None:
         embedding = await async_client.models.embeddings.create(
-            texts=["string"],
+            texts=["Who invented the light bulb?", "Hey, how are you?"],
         )
         assert_matches_type(Embeddings, embedding, path=["response"])
 
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncMaisa) -> None:
         response = await async_client.models.embeddings.with_raw_response.create(
-            texts=["string"],
+            texts=["Who invented the light bulb?", "Hey, how are you?"],
         )
 
         assert response.is_closed is True
@@ -75,7 +75,7 @@ class TestAsyncEmbeddings:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncMaisa) -> None:
         async with async_client.models.embeddings.with_streaming_response.create(
-            texts=["string"],
+            texts=["Who invented the light bulb?", "Hey, how are you?"],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
