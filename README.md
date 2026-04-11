@@ -33,7 +33,7 @@ client = Maisa(
 )
 
 text_summary = client.capabilities.summarize(
-    text="Example long text...",
+    text="Lorem Ipsum dolor sit amet",
 )
 print(text_summary.summary)
 ```
@@ -59,7 +59,7 @@ client = AsyncMaisa(
 
 async def main() -> None:
     text_summary = await client.capabilities.summarize(
-        text="Example long text...",
+        text="Lorem Ipsum dolor sit amet",
     )
     print(text_summary.summary)
 
@@ -95,7 +95,7 @@ async def main() -> None:
         http_client=DefaultAioHttpClient(),
     ) as client:
         text_summary = await client.capabilities.summarize(
-            text="Example long text...",
+            text="Lorem Ipsum dolor sit amet",
         )
         print(text_summary.summary)
 
@@ -147,7 +147,7 @@ client = Maisa()
 
 try:
     client.capabilities.summarize(
-        text="Example long text...",
+        text="Lorem Ipsum dolor sit amet",
     )
 except maisa.APIConnectionError as e:
     print("The server could not be reached")
@@ -192,7 +192,7 @@ client = Maisa(
 
 # Or, configure per-request:
 client.with_options(max_retries=5).capabilities.summarize(
-    text="Example long text...",
+    text="Lorem Ipsum dolor sit amet",
 )
 ```
 
@@ -217,7 +217,7 @@ client = Maisa(
 
 # Override per-request:
 client.with_options(timeout=5.0).capabilities.summarize(
-    text="Example long text...",
+    text="Lorem Ipsum dolor sit amet",
 )
 ```
 
@@ -260,7 +260,7 @@ from maisa import Maisa
 
 client = Maisa()
 response = client.capabilities.with_raw_response.summarize(
-    text="Example long text...",
+    text="Lorem Ipsum dolor sit amet",
 )
 print(response.headers.get('X-My-Header'))
 
@@ -280,7 +280,7 @@ To stream the response body, use `.with_streaming_response` instead, which requi
 
 ```python
 with client.capabilities.with_streaming_response.summarize(
-    text="Example long text...",
+    text="Lorem Ipsum dolor sit amet",
 ) as response:
     print(response.headers.get("X-My-Header"))
 

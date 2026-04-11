@@ -866,7 +866,7 @@ class TestMaisa:
         respx_mock.post("/v1/capabilities/summarize").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            client.capabilities.with_streaming_response.summarize(text="Example long text...").__enter__()
+            client.capabilities.with_streaming_response.summarize(text="Lorem Ipsum dolor sit amet").__enter__()
 
         assert _get_open_connections(client) == 0
 
@@ -876,7 +876,7 @@ class TestMaisa:
         respx_mock.post("/v1/capabilities/summarize").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            client.capabilities.with_streaming_response.summarize(text="Example long text...").__enter__()
+            client.capabilities.with_streaming_response.summarize(text="Lorem Ipsum dolor sit amet").__enter__()
         assert _get_open_connections(client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
@@ -905,7 +905,7 @@ class TestMaisa:
 
         respx_mock.post("/v1/capabilities/summarize").mock(side_effect=retry_handler)
 
-        response = client.capabilities.with_raw_response.summarize(text="Example long text...")
+        response = client.capabilities.with_raw_response.summarize(text="Lorem Ipsum dolor sit amet")
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -928,7 +928,7 @@ class TestMaisa:
         respx_mock.post("/v1/capabilities/summarize").mock(side_effect=retry_handler)
 
         response = client.capabilities.with_raw_response.summarize(
-            text="Example long text...", extra_headers={"x-stainless-retry-count": Omit()}
+            text="Lorem Ipsum dolor sit amet", extra_headers={"x-stainless-retry-count": Omit()}
         )
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
@@ -953,7 +953,7 @@ class TestMaisa:
         respx_mock.post("/v1/capabilities/summarize").mock(side_effect=retry_handler)
 
         response = client.capabilities.with_raw_response.summarize(
-            text="Example long text...", extra_headers={"x-stainless-retry-count": "42"}
+            text="Lorem Ipsum dolor sit amet", extra_headers={"x-stainless-retry-count": "42"}
         )
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
@@ -1786,7 +1786,9 @@ class TestAsyncMaisa:
         respx_mock.post("/v1/capabilities/summarize").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            await async_client.capabilities.with_streaming_response.summarize(text="Example long text...").__aenter__()
+            await async_client.capabilities.with_streaming_response.summarize(
+                text="Lorem Ipsum dolor sit amet"
+            ).__aenter__()
 
         assert _get_open_connections(async_client) == 0
 
@@ -1796,7 +1798,9 @@ class TestAsyncMaisa:
         respx_mock.post("/v1/capabilities/summarize").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            await async_client.capabilities.with_streaming_response.summarize(text="Example long text...").__aenter__()
+            await async_client.capabilities.with_streaming_response.summarize(
+                text="Lorem Ipsum dolor sit amet"
+            ).__aenter__()
         assert _get_open_connections(async_client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
@@ -1825,7 +1829,7 @@ class TestAsyncMaisa:
 
         respx_mock.post("/v1/capabilities/summarize").mock(side_effect=retry_handler)
 
-        response = await client.capabilities.with_raw_response.summarize(text="Example long text...")
+        response = await client.capabilities.with_raw_response.summarize(text="Lorem Ipsum dolor sit amet")
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -1850,7 +1854,7 @@ class TestAsyncMaisa:
         respx_mock.post("/v1/capabilities/summarize").mock(side_effect=retry_handler)
 
         response = await client.capabilities.with_raw_response.summarize(
-            text="Example long text...", extra_headers={"x-stainless-retry-count": Omit()}
+            text="Lorem Ipsum dolor sit amet", extra_headers={"x-stainless-retry-count": Omit()}
         )
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
@@ -1875,7 +1879,7 @@ class TestAsyncMaisa:
         respx_mock.post("/v1/capabilities/summarize").mock(side_effect=retry_handler)
 
         response = await client.capabilities.with_raw_response.summarize(
-            text="Example long text...", extra_headers={"x-stainless-retry-count": "42"}
+            text="Lorem Ipsum dolor sit amet", extra_headers={"x-stainless-retry-count": "42"}
         )
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
