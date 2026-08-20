@@ -1,11 +1,11 @@
-# File generated from our OpenAPI spec by Stainless.
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from __future__ import annotations
 
-from typing import List
-from typing_extensions import Required, TypedDict
+from typing import Optional
+from typing_extensions import Literal, Required, TypedDict
 
-from .._types import FileTypes
+from .._types import FileTypes, SequenceNotStr
 
 __all__ = ["KpuRunParams"]
 
@@ -28,5 +28,20 @@ class KpuRunParams(TypedDict, total=False):
     intent. This feature is experimental.
     """
 
-    file: List[FileTypes]
+    file: SequenceNotStr[FileTypes]
     """Files to be used in the KPU execution. Files can be of any type."""
+
+    reasoner_model: Optional[
+        Literal[
+            "gpt-4-turbo",
+            "mistral-large",
+            "gpt-3.5-turbo",
+            "claude-3-sonnet",
+            "claude-3-opus",
+            "gemini-pro",
+            "azure/gpt-4-turbo",
+            "openai/gpt-4-turbo",
+        ]
+    ]
+
+    reasoner_prompt: Optional[str]

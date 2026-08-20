@@ -1,33 +1,33 @@
-# File generated from our OpenAPI spec by Stainless.
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from .media import (
-    Media,
-    AsyncMedia,
-    MediaWithRawResponse,
-    AsyncMediaWithRawResponse,
-    MediaWithStreamingResponse,
-    AsyncMediaWithStreamingResponse,
+    MediaResource,
+    AsyncMediaResource,
+    MediaResourceWithRawResponse,
+    AsyncMediaResourceWithRawResponse,
+    MediaResourceWithStreamingResponse,
+    AsyncMediaResourceWithStreamingResponse,
 )
 from .capabilities import (
-    Capabilities,
-    AsyncCapabilities,
-    CapabilitiesWithRawResponse,
-    AsyncCapabilitiesWithRawResponse,
-    CapabilitiesWithStreamingResponse,
-    AsyncCapabilitiesWithStreamingResponse,
+    CapabilitiesResource,
+    AsyncCapabilitiesResource,
+    CapabilitiesResourceWithRawResponse,
+    AsyncCapabilitiesResourceWithRawResponse,
+    CapabilitiesResourceWithStreamingResponse,
+    AsyncCapabilitiesResourceWithStreamingResponse,
 )
 
 __all__ = [
-    "Media",
-    "AsyncMedia",
-    "MediaWithRawResponse",
-    "AsyncMediaWithRawResponse",
-    "MediaWithStreamingResponse",
-    "AsyncMediaWithStreamingResponse",
-    "Capabilities",
-    "AsyncCapabilities",
-    "CapabilitiesWithRawResponse",
-    "AsyncCapabilitiesWithRawResponse",
-    "CapabilitiesWithStreamingResponse",
-    "AsyncCapabilitiesWithStreamingResponse",
+    "MediaResource",
+    "AsyncMediaResource",
+    "MediaResourceWithRawResponse",
+    "AsyncMediaResourceWithRawResponse",
+    "MediaResourceWithStreamingResponse",
+    "AsyncMediaResourceWithStreamingResponse",
+    "CapabilitiesResource",
+    "AsyncCapabilitiesResource",
+    "CapabilitiesResourceWithRawResponse",
+    "AsyncCapabilitiesResourceWithRawResponse",
+    "CapabilitiesResourceWithStreamingResponse",
+    "AsyncCapabilitiesResourceWithStreamingResponse",
 ]

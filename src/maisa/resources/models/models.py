@@ -1,112 +1,102 @@
-# File generated from our OpenAPI spec by Stainless.
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from __future__ import annotations
 
-from .rerank import (
-    RerankResource,
-    AsyncRerankResource,
-    RerankResourceWithRawResponse,
-    AsyncRerankResourceWithRawResponse,
-    RerankResourceWithStreamingResponse,
-    AsyncRerankResourceWithStreamingResponse,
-)
 from ..._compat import cached_property
 from .embeddings import (
-    Embeddings,
-    AsyncEmbeddings,
-    EmbeddingsWithRawResponse,
-    AsyncEmbeddingsWithRawResponse,
-    EmbeddingsWithStreamingResponse,
-    AsyncEmbeddingsWithStreamingResponse,
+    EmbeddingsResource,
+    AsyncEmbeddingsResource,
+    EmbeddingsResourceWithRawResponse,
+    AsyncEmbeddingsResourceWithRawResponse,
+    EmbeddingsResourceWithStreamingResponse,
+    AsyncEmbeddingsResourceWithStreamingResponse,
 )
 from ..._resource import SyncAPIResource, AsyncAPIResource
 
-__all__ = ["Models", "AsyncModels"]
+__all__ = ["ModelsResource", "AsyncModelsResource"]
 
 
-class Models(SyncAPIResource):
+class ModelsResource(SyncAPIResource):
     @cached_property
-    def embeddings(self) -> Embeddings:
-        return Embeddings(self._client)
-
-    @cached_property
-    def rerank(self) -> RerankResource:
-        return RerankResource(self._client)
+    def embeddings(self) -> EmbeddingsResource:
+        return EmbeddingsResource(self._client)
 
     @cached_property
-    def with_raw_response(self) -> ModelsWithRawResponse:
-        return ModelsWithRawResponse(self)
+    def with_raw_response(self) -> ModelsResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/maisaai/python-sdk#accessing-raw-response-data-eg-headers
+        """
+        return ModelsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> ModelsWithStreamingResponse:
-        return ModelsWithStreamingResponse(self)
+    def with_streaming_response(self) -> ModelsResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/maisaai/python-sdk#with_streaming_response
+        """
+        return ModelsResourceWithStreamingResponse(self)
 
 
-class AsyncModels(AsyncAPIResource):
+class AsyncModelsResource(AsyncAPIResource):
     @cached_property
-    def embeddings(self) -> AsyncEmbeddings:
-        return AsyncEmbeddings(self._client)
-
-    @cached_property
-    def rerank(self) -> AsyncRerankResource:
-        return AsyncRerankResource(self._client)
-
-    @cached_property
-    def with_raw_response(self) -> AsyncModelsWithRawResponse:
-        return AsyncModelsWithRawResponse(self)
+    def embeddings(self) -> AsyncEmbeddingsResource:
+        return AsyncEmbeddingsResource(self._client)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncModelsWithStreamingResponse:
-        return AsyncModelsWithStreamingResponse(self)
+    def with_raw_response(self) -> AsyncModelsResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/maisaai/python-sdk#accessing-raw-response-data-eg-headers
+        """
+        return AsyncModelsResourceWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncModelsResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/maisaai/python-sdk#with_streaming_response
+        """
+        return AsyncModelsResourceWithStreamingResponse(self)
 
 
-class ModelsWithRawResponse:
-    def __init__(self, models: Models) -> None:
+class ModelsResourceWithRawResponse:
+    def __init__(self, models: ModelsResource) -> None:
         self._models = models
 
     @cached_property
-    def embeddings(self) -> EmbeddingsWithRawResponse:
-        return EmbeddingsWithRawResponse(self._models.embeddings)
-
-    @cached_property
-    def rerank(self) -> RerankResourceWithRawResponse:
-        return RerankResourceWithRawResponse(self._models.rerank)
+    def embeddings(self) -> EmbeddingsResourceWithRawResponse:
+        return EmbeddingsResourceWithRawResponse(self._models.embeddings)
 
 
-class AsyncModelsWithRawResponse:
-    def __init__(self, models: AsyncModels) -> None:
+class AsyncModelsResourceWithRawResponse:
+    def __init__(self, models: AsyncModelsResource) -> None:
         self._models = models
 
     @cached_property
-    def embeddings(self) -> AsyncEmbeddingsWithRawResponse:
-        return AsyncEmbeddingsWithRawResponse(self._models.embeddings)
-
-    @cached_property
-    def rerank(self) -> AsyncRerankResourceWithRawResponse:
-        return AsyncRerankResourceWithRawResponse(self._models.rerank)
+    def embeddings(self) -> AsyncEmbeddingsResourceWithRawResponse:
+        return AsyncEmbeddingsResourceWithRawResponse(self._models.embeddings)
 
 
-class ModelsWithStreamingResponse:
-    def __init__(self, models: Models) -> None:
+class ModelsResourceWithStreamingResponse:
+    def __init__(self, models: ModelsResource) -> None:
         self._models = models
 
     @cached_property
-    def embeddings(self) -> EmbeddingsWithStreamingResponse:
-        return EmbeddingsWithStreamingResponse(self._models.embeddings)
-
-    @cached_property
-    def rerank(self) -> RerankResourceWithStreamingResponse:
-        return RerankResourceWithStreamingResponse(self._models.rerank)
+    def embeddings(self) -> EmbeddingsResourceWithStreamingResponse:
+        return EmbeddingsResourceWithStreamingResponse(self._models.embeddings)
 
 
-class AsyncModelsWithStreamingResponse:
-    def __init__(self, models: AsyncModels) -> None:
+class AsyncModelsResourceWithStreamingResponse:
+    def __init__(self, models: AsyncModelsResource) -> None:
         self._models = models
 
     @cached_property
-    def embeddings(self) -> AsyncEmbeddingsWithStreamingResponse:
-        return AsyncEmbeddingsWithStreamingResponse(self._models.embeddings)
-
-    @cached_property
-    def rerank(self) -> AsyncRerankResourceWithStreamingResponse:
-        return AsyncRerankResourceWithStreamingResponse(self._models.rerank)
+    def embeddings(self) -> AsyncEmbeddingsResourceWithStreamingResponse:
+        return AsyncEmbeddingsResourceWithStreamingResponse(self._models.embeddings)

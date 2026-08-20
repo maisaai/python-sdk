@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless.
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from __future__ import annotations
 
@@ -20,16 +20,16 @@ class TestMedia:
     @parametrize
     def test_method_compare(self, client: Maisa) -> None:
         media = client.capabilities.media.compare(
-            file1=b"raw file contents",
-            file2=b"raw file contents",
+            file1=b"Example data",
+            file2=b"Example data",
         )
         assert_matches_type(TextComparator, media, path=["response"])
 
     @parametrize
     def test_method_compare_with_all_params(self, client: Maisa) -> None:
         media = client.capabilities.media.compare(
-            file1=b"raw file contents",
-            file2=b"raw file contents",
+            file1=b"Example data",
+            file2=b"Example data",
             lang="en",
             prompt="Compare the value for end customer.",
             variable1_description="The name of the person.",
@@ -50,8 +50,8 @@ class TestMedia:
     @parametrize
     def test_raw_response_compare(self, client: Maisa) -> None:
         response = client.capabilities.media.with_raw_response.compare(
-            file1=b"raw file contents",
-            file2=b"raw file contents",
+            file1=b"Example data",
+            file2=b"Example data",
         )
 
         assert response.is_closed is True
@@ -62,8 +62,8 @@ class TestMedia:
     @parametrize
     def test_streaming_response_compare(self, client: Maisa) -> None:
         with client.capabilities.media.with_streaming_response.compare(
-            file1=b"raw file contents",
-            file2=b"raw file contents",
+            file1=b"Example data",
+            file2=b"Example data",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -76,14 +76,14 @@ class TestMedia:
     @parametrize
     def test_method_extract(self, client: Maisa) -> None:
         media = client.capabilities.media.extract(
-            file=b"raw file contents",
+            file=b"Example data",
         )
         assert_matches_type(TextExtractor, media, path=["response"])
 
     @parametrize
     def test_method_extract_with_all_params(self, client: Maisa) -> None:
         media = client.capabilities.media.extract(
-            file=b"raw file contents",
+            file=b"Example data",
             lang="en",
             variable1_description="The name of the person.",
             variable1_name="Name",
@@ -103,7 +103,7 @@ class TestMedia:
     @parametrize
     def test_raw_response_extract(self, client: Maisa) -> None:
         response = client.capabilities.media.with_raw_response.extract(
-            file=b"raw file contents",
+            file=b"Example data",
         )
 
         assert response.is_closed is True
@@ -114,7 +114,7 @@ class TestMedia:
     @parametrize
     def test_streaming_response_extract(self, client: Maisa) -> None:
         with client.capabilities.media.with_streaming_response.extract(
-            file=b"raw file contents",
+            file=b"Example data",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -127,14 +127,14 @@ class TestMedia:
     @parametrize
     def test_method_summarize(self, client: Maisa) -> None:
         media = client.capabilities.media.summarize(
-            file=b"raw file contents",
+            file=b"Example data",
         )
         assert_matches_type(TextSummary, media, path=["response"])
 
     @parametrize
     def test_method_summarize_with_all_params(self, client: Maisa) -> None:
         media = client.capabilities.media.summarize(
-            file=b"raw file contents",
+            file=b"Example data",
             format="paragraph",
             lang="en",
             length="short",
@@ -145,7 +145,7 @@ class TestMedia:
     @parametrize
     def test_raw_response_summarize(self, client: Maisa) -> None:
         response = client.capabilities.media.with_raw_response.summarize(
-            file=b"raw file contents",
+            file=b"Example data",
         )
 
         assert response.is_closed is True
@@ -156,7 +156,7 @@ class TestMedia:
     @parametrize
     def test_streaming_response_summarize(self, client: Maisa) -> None:
         with client.capabilities.media.with_streaming_response.summarize(
-            file=b"raw file contents",
+            file=b"Example data",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -168,21 +168,23 @@ class TestMedia:
 
 
 class TestAsyncMedia:
-    parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
+    parametrize = pytest.mark.parametrize(
+        "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
+    )
 
     @parametrize
     async def test_method_compare(self, async_client: AsyncMaisa) -> None:
         media = await async_client.capabilities.media.compare(
-            file1=b"raw file contents",
-            file2=b"raw file contents",
+            file1=b"Example data",
+            file2=b"Example data",
         )
         assert_matches_type(TextComparator, media, path=["response"])
 
     @parametrize
     async def test_method_compare_with_all_params(self, async_client: AsyncMaisa) -> None:
         media = await async_client.capabilities.media.compare(
-            file1=b"raw file contents",
-            file2=b"raw file contents",
+            file1=b"Example data",
+            file2=b"Example data",
             lang="en",
             prompt="Compare the value for end customer.",
             variable1_description="The name of the person.",
@@ -203,8 +205,8 @@ class TestAsyncMedia:
     @parametrize
     async def test_raw_response_compare(self, async_client: AsyncMaisa) -> None:
         response = await async_client.capabilities.media.with_raw_response.compare(
-            file1=b"raw file contents",
-            file2=b"raw file contents",
+            file1=b"Example data",
+            file2=b"Example data",
         )
 
         assert response.is_closed is True
@@ -215,8 +217,8 @@ class TestAsyncMedia:
     @parametrize
     async def test_streaming_response_compare(self, async_client: AsyncMaisa) -> None:
         async with async_client.capabilities.media.with_streaming_response.compare(
-            file1=b"raw file contents",
-            file2=b"raw file contents",
+            file1=b"Example data",
+            file2=b"Example data",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -229,14 +231,14 @@ class TestAsyncMedia:
     @parametrize
     async def test_method_extract(self, async_client: AsyncMaisa) -> None:
         media = await async_client.capabilities.media.extract(
-            file=b"raw file contents",
+            file=b"Example data",
         )
         assert_matches_type(TextExtractor, media, path=["response"])
 
     @parametrize
     async def test_method_extract_with_all_params(self, async_client: AsyncMaisa) -> None:
         media = await async_client.capabilities.media.extract(
-            file=b"raw file contents",
+            file=b"Example data",
             lang="en",
             variable1_description="The name of the person.",
             variable1_name="Name",
@@ -256,7 +258,7 @@ class TestAsyncMedia:
     @parametrize
     async def test_raw_response_extract(self, async_client: AsyncMaisa) -> None:
         response = await async_client.capabilities.media.with_raw_response.extract(
-            file=b"raw file contents",
+            file=b"Example data",
         )
 
         assert response.is_closed is True
@@ -267,7 +269,7 @@ class TestAsyncMedia:
     @parametrize
     async def test_streaming_response_extract(self, async_client: AsyncMaisa) -> None:
         async with async_client.capabilities.media.with_streaming_response.extract(
-            file=b"raw file contents",
+            file=b"Example data",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -280,14 +282,14 @@ class TestAsyncMedia:
     @parametrize
     async def test_method_summarize(self, async_client: AsyncMaisa) -> None:
         media = await async_client.capabilities.media.summarize(
-            file=b"raw file contents",
+            file=b"Example data",
         )
         assert_matches_type(TextSummary, media, path=["response"])
 
     @parametrize
     async def test_method_summarize_with_all_params(self, async_client: AsyncMaisa) -> None:
         media = await async_client.capabilities.media.summarize(
-            file=b"raw file contents",
+            file=b"Example data",
             format="paragraph",
             lang="en",
             length="short",
@@ -298,7 +300,7 @@ class TestAsyncMedia:
     @parametrize
     async def test_raw_response_summarize(self, async_client: AsyncMaisa) -> None:
         response = await async_client.capabilities.media.with_raw_response.summarize(
-            file=b"raw file contents",
+            file=b"Example data",
         )
 
         assert response.is_closed is True
@@ -309,7 +311,7 @@ class TestAsyncMedia:
     @parametrize
     async def test_streaming_response_summarize(self, async_client: AsyncMaisa) -> None:
         async with async_client.capabilities.media.with_streaming_response.summarize(
-            file=b"raw file contents",
+            file=b"Example data",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

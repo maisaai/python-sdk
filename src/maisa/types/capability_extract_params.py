@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless.
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from __future__ import annotations
 
@@ -24,6 +24,8 @@ class CapabilityExtractParams(TypedDict, total=False):
 
 
 class Variables(TypedDict, total=False):
+    """Text Extraction Request Variable."""
+
     description: Required[str]
     """The description of the variable."""
 

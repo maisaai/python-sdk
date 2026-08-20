@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless.
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from __future__ import annotations
 
@@ -19,14 +19,14 @@ class TestFromPdf:
     @parametrize
     def test_method_create(self, client: Maisa) -> None:
         from_pdf = client.file_interpreter.from_pdf.create(
-            file=b"raw file contents",
+            file=b"Example data",
         )
         assert_matches_type(object, from_pdf, path=["response"])
 
     @parametrize
     def test_method_create_with_all_params(self, client: Maisa) -> None:
         from_pdf = client.file_interpreter.from_pdf.create(
-            file=b"raw file contents",
+            file=b"Example data",
             max_pages=0,
         )
         assert_matches_type(object, from_pdf, path=["response"])
@@ -34,7 +34,7 @@ class TestFromPdf:
     @parametrize
     def test_raw_response_create(self, client: Maisa) -> None:
         response = client.file_interpreter.from_pdf.with_raw_response.create(
-            file=b"raw file contents",
+            file=b"Example data",
         )
 
         assert response.is_closed is True
@@ -45,7 +45,7 @@ class TestFromPdf:
     @parametrize
     def test_streaming_response_create(self, client: Maisa) -> None:
         with client.file_interpreter.from_pdf.with_streaming_response.create(
-            file=b"raw file contents",
+            file=b"Example data",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -57,19 +57,21 @@ class TestFromPdf:
 
 
 class TestAsyncFromPdf:
-    parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
+    parametrize = pytest.mark.parametrize(
+        "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
+    )
 
     @parametrize
     async def test_method_create(self, async_client: AsyncMaisa) -> None:
         from_pdf = await async_client.file_interpreter.from_pdf.create(
-            file=b"raw file contents",
+            file=b"Example data",
         )
         assert_matches_type(object, from_pdf, path=["response"])
 
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncMaisa) -> None:
         from_pdf = await async_client.file_interpreter.from_pdf.create(
-            file=b"raw file contents",
+            file=b"Example data",
             max_pages=0,
         )
         assert_matches_type(object, from_pdf, path=["response"])
@@ -77,7 +79,7 @@ class TestAsyncFromPdf:
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncMaisa) -> None:
         response = await async_client.file_interpreter.from_pdf.with_raw_response.create(
-            file=b"raw file contents",
+            file=b"Example data",
         )
 
         assert response.is_closed is True
@@ -88,7 +90,7 @@ class TestAsyncFromPdf:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncMaisa) -> None:
         async with async_client.file_interpreter.from_pdf.with_streaming_response.create(
-            file=b"raw file contents",
+            file=b"Example data",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

@@ -1,12 +1,15 @@
-# File generated from our OpenAPI spec by Stainless.
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+import typing as _t
 
 from . import types
-from ._types import NoneType, Transport, ProxiesTypes
+from ._types import NOT_GIVEN, Omit, NoneType, NotGiven, Transport, ProxiesTypes, omit, not_given
 from ._utils import file_from_path
 from ._client import Maisa, Client, Stream, Timeout, Transport, AsyncMaisa, AsyncClient, AsyncStream, RequestOptions
 from ._models import BaseModel
 from ._version import __title__, __version__
 from ._response import APIResponse as APIResponse, AsyncAPIResponse as AsyncAPIResponse
+from ._constants import DEFAULT_TIMEOUT, DEFAULT_MAX_RETRIES, DEFAULT_CONNECTION_LIMITS
 from ._exceptions import (
     APIError,
     MaisaError,
@@ -23,6 +26,7 @@ from ._exceptions import (
     UnprocessableEntityError,
     APIResponseValidationError,
 )
+from ._base_client import DefaultHttpxClient, DefaultAioHttpClient, DefaultAsyncHttpxClient
 from ._utils._logs import setup_logging as _setup_logging
 
 __all__ = [
@@ -32,6 +36,11 @@ __all__ = [
     "NoneType",
     "Transport",
     "ProxiesTypes",
+    "NotGiven",
+    "NOT_GIVEN",
+    "not_given",
+    "Omit",
+    "omit",
     "MaisaError",
     "APIError",
     "APIStatusError",
@@ -56,7 +65,16 @@ __all__ = [
     "AsyncMaisa",
     "file_from_path",
     "BaseModel",
+    "DEFAULT_TIMEOUT",
+    "DEFAULT_MAX_RETRIES",
+    "DEFAULT_CONNECTION_LIMITS",
+    "DefaultHttpxClient",
+    "DefaultAsyncHttpxClient",
+    "DefaultAioHttpClient",
 ]
+
+if not _t.TYPE_CHECKING:
+    from ._utils._resources_proxy import resources as resources
 
 _setup_logging()
 

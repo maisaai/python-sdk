@@ -1,8 +1,7 @@
-# File generated from our OpenAPI spec by Stainless.
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from __future__ import annotations
 
-from .from_image import FromImage as FromImage
 from .from_pdf_create_params import FromPdfCreateParams as FromPdfCreateParams
 from .from_docx_create_params import FromDocxCreateParams as FromDocxCreateParams
 from .from_html_create_params import FromHTMLCreateParams as FromHTMLCreateParams

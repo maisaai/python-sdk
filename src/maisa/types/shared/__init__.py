@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless.
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from .text_summary import TextSummary as TextSummary
 from .text_extractor import TextExtractor as TextExtractor

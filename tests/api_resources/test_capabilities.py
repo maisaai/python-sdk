@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless.
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from __future__ import annotations
 
@@ -24,8 +24,8 @@ class TestCapabilities:
             text2="Sed ut perspiciatis unde omnis",
             variables={
                 "name": {
-                    "type": "string",
                     "description": "The name of the person.",
+                    "type": "string",
                 }
             },
         )
@@ -38,8 +38,8 @@ class TestCapabilities:
             text2="Sed ut perspiciatis unde omnis",
             variables={
                 "name": {
-                    "type": "string",
                     "description": "The name of the person.",
+                    "type": "string",
                 }
             },
             lang="en",
@@ -54,8 +54,8 @@ class TestCapabilities:
             text2="Sed ut perspiciatis unde omnis",
             variables={
                 "name": {
-                    "type": "string",
                     "description": "The name of the person.",
+                    "type": "string",
                 }
             },
         )
@@ -72,8 +72,8 @@ class TestCapabilities:
             text2="Sed ut perspiciatis unde omnis",
             variables={
                 "name": {
-                    "type": "string",
                     "description": "The name of the person.",
+                    "type": "string",
                 }
             },
         ) as response:
@@ -88,11 +88,11 @@ class TestCapabilities:
     @parametrize
     def test_method_extract(self, client: Maisa) -> None:
         capability = client.capabilities.extract(
-            text="Example long text...",
+            text="My name is John Doe",
             variables={
                 "name": {
-                    "type": "string",
                     "description": "The name of the person.",
+                    "type": "string",
                 }
             },
         )
@@ -101,11 +101,11 @@ class TestCapabilities:
     @parametrize
     def test_method_extract_with_all_params(self, client: Maisa) -> None:
         capability = client.capabilities.extract(
-            text="Example long text...",
+            text="My name is John Doe",
             variables={
                 "name": {
-                    "type": "string",
                     "description": "The name of the person.",
+                    "type": "string",
                 }
             },
             lang="en",
@@ -115,11 +115,11 @@ class TestCapabilities:
     @parametrize
     def test_raw_response_extract(self, client: Maisa) -> None:
         response = client.capabilities.with_raw_response.extract(
-            text="Example long text...",
+            text="My name is John Doe",
             variables={
                 "name": {
-                    "type": "string",
                     "description": "The name of the person.",
+                    "type": "string",
                 }
             },
         )
@@ -132,11 +132,11 @@ class TestCapabilities:
     @parametrize
     def test_streaming_response_extract(self, client: Maisa) -> None:
         with client.capabilities.with_streaming_response.extract(
-            text="Example long text...",
+            text="My name is John Doe",
             variables={
                 "name": {
-                    "type": "string",
                     "description": "The name of the person.",
+                    "type": "string",
                 }
             },
         ) as response:
@@ -151,17 +151,17 @@ class TestCapabilities:
     @parametrize
     def test_method_summarize(self, client: Maisa) -> None:
         capability = client.capabilities.summarize(
-            text="Example long text...",
+            text="Lorem Ipsum dolor sit amet",
         )
         assert_matches_type(TextSummary, capability, path=["response"])
 
     @parametrize
     def test_method_summarize_with_all_params(self, client: Maisa) -> None:
         capability = client.capabilities.summarize(
-            text="Example long text...",
+            text="Lorem Ipsum dolor sit amet",
             format="paragraph",
             lang="en",
-            length="medium",
+            length="long",
             summary_hint="Example summary of the text...",
         )
         assert_matches_type(TextSummary, capability, path=["response"])
@@ -169,7 +169,7 @@ class TestCapabilities:
     @parametrize
     def test_raw_response_summarize(self, client: Maisa) -> None:
         response = client.capabilities.with_raw_response.summarize(
-            text="Example long text...",
+            text="Lorem Ipsum dolor sit amet",
         )
 
         assert response.is_closed is True
@@ -180,7 +180,7 @@ class TestCapabilities:
     @parametrize
     def test_streaming_response_summarize(self, client: Maisa) -> None:
         with client.capabilities.with_streaming_response.summarize(
-            text="Example long text...",
+            text="Lorem Ipsum dolor sit amet",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -192,7 +192,9 @@ class TestCapabilities:
 
 
 class TestAsyncCapabilities:
-    parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
+    parametrize = pytest.mark.parametrize(
+        "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
+    )
 
     @parametrize
     async def test_method_compare(self, async_client: AsyncMaisa) -> None:
@@ -201,8 +203,8 @@ class TestAsyncCapabilities:
             text2="Sed ut perspiciatis unde omnis",
             variables={
                 "name": {
-                    "type": "string",
                     "description": "The name of the person.",
+                    "type": "string",
                 }
             },
         )
@@ -215,8 +217,8 @@ class TestAsyncCapabilities:
             text2="Sed ut perspiciatis unde omnis",
             variables={
                 "name": {
-                    "type": "string",
                     "description": "The name of the person.",
+                    "type": "string",
                 }
             },
             lang="en",
@@ -231,8 +233,8 @@ class TestAsyncCapabilities:
             text2="Sed ut perspiciatis unde omnis",
             variables={
                 "name": {
-                    "type": "string",
                     "description": "The name of the person.",
+                    "type": "string",
                 }
             },
         )
@@ -249,8 +251,8 @@ class TestAsyncCapabilities:
             text2="Sed ut perspiciatis unde omnis",
             variables={
                 "name": {
-                    "type": "string",
                     "description": "The name of the person.",
+                    "type": "string",
                 }
             },
         ) as response:
@@ -265,11 +267,11 @@ class TestAsyncCapabilities:
     @parametrize
     async def test_method_extract(self, async_client: AsyncMaisa) -> None:
         capability = await async_client.capabilities.extract(
-            text="Example long text...",
+            text="My name is John Doe",
             variables={
                 "name": {
-                    "type": "string",
                     "description": "The name of the person.",
+                    "type": "string",
                 }
             },
         )
@@ -278,11 +280,11 @@ class TestAsyncCapabilities:
     @parametrize
     async def test_method_extract_with_all_params(self, async_client: AsyncMaisa) -> None:
         capability = await async_client.capabilities.extract(
-            text="Example long text...",
+            text="My name is John Doe",
             variables={
                 "name": {
-                    "type": "string",
                     "description": "The name of the person.",
+                    "type": "string",
                 }
             },
             lang="en",
@@ -292,11 +294,11 @@ class TestAsyncCapabilities:
     @parametrize
     async def test_raw_response_extract(self, async_client: AsyncMaisa) -> None:
         response = await async_client.capabilities.with_raw_response.extract(
-            text="Example long text...",
+            text="My name is John Doe",
             variables={
                 "name": {
-                    "type": "string",
                     "description": "The name of the person.",
+                    "type": "string",
                 }
             },
         )
@@ -309,11 +311,11 @@ class TestAsyncCapabilities:
     @parametrize
     async def test_streaming_response_extract(self, async_client: AsyncMaisa) -> None:
         async with async_client.capabilities.with_streaming_response.extract(
-            text="Example long text...",
+            text="My name is John Doe",
             variables={
                 "name": {
-                    "type": "string",
                     "description": "The name of the person.",
+                    "type": "string",
                 }
             },
         ) as response:
@@ -328,17 +330,17 @@ class TestAsyncCapabilities:
     @parametrize
     async def test_method_summarize(self, async_client: AsyncMaisa) -> None:
         capability = await async_client.capabilities.summarize(
-            text="Example long text...",
+            text="Lorem Ipsum dolor sit amet",
         )
         assert_matches_type(TextSummary, capability, path=["response"])
 
     @parametrize
     async def test_method_summarize_with_all_params(self, async_client: AsyncMaisa) -> None:
         capability = await async_client.capabilities.summarize(
-            text="Example long text...",
+            text="Lorem Ipsum dolor sit amet",
             format="paragraph",
             lang="en",
-            length="medium",
+            length="long",
             summary_hint="Example summary of the text...",
         )
         assert_matches_type(TextSummary, capability, path=["response"])
@@ -346,7 +348,7 @@ class TestAsyncCapabilities:
     @parametrize
     async def test_raw_response_summarize(self, async_client: AsyncMaisa) -> None:
         response = await async_client.capabilities.with_raw_response.summarize(
-            text="Example long text...",
+            text="Lorem Ipsum dolor sit amet",
         )
 
         assert response.is_closed is True
@@ -357,7 +359,7 @@ class TestAsyncCapabilities:
     @parametrize
     async def test_streaming_response_summarize(self, async_client: AsyncMaisa) -> None:
         async with async_client.capabilities.with_streaming_response.summarize(
-            text="Example long text...",
+            text="Lorem Ipsum dolor sit amet",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

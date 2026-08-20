@@ -1,4 +1,4 @@
-# File generated from our OpenAPI spec by Stainless.
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from __future__ import annotations
 
@@ -19,14 +19,14 @@ class TestFromHTML:
     @parametrize
     def test_method_create(self, client: Maisa) -> None:
         from_html = client.file_interpreter.from_html.create(
-            file=b"raw file contents",
+            file=b"Example data",
         )
         assert_matches_type(object, from_html, path=["response"])
 
     @parametrize
     def test_raw_response_create(self, client: Maisa) -> None:
         response = client.file_interpreter.from_html.with_raw_response.create(
-            file=b"raw file contents",
+            file=b"Example data",
         )
 
         assert response.is_closed is True
@@ -37,7 +37,7 @@ class TestFromHTML:
     @parametrize
     def test_streaming_response_create(self, client: Maisa) -> None:
         with client.file_interpreter.from_html.with_streaming_response.create(
-            file=b"raw file contents",
+            file=b"Example data",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -49,19 +49,21 @@ class TestFromHTML:
 
 
 class TestAsyncFromHTML:
-    parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
+    parametrize = pytest.mark.parametrize(
+        "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
+    )
 
     @parametrize
     async def test_method_create(self, async_client: AsyncMaisa) -> None:
         from_html = await async_client.file_interpreter.from_html.create(
-            file=b"raw file contents",
+            file=b"Example data",
         )
         assert_matches_type(object, from_html, path=["response"])
 
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncMaisa) -> None:
         response = await async_client.file_interpreter.from_html.with_raw_response.create(
-            file=b"raw file contents",
+            file=b"Example data",
         )
 
         assert response.is_closed is True
@@ -72,7 +74,7 @@ class TestAsyncFromHTML:
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncMaisa) -> None:
         async with async_client.file_interpreter.from_html.with_streaming_response.create(
-            file=b"raw file contents",
+            file=b"Example data",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
